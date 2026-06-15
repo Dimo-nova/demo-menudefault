@@ -107,7 +107,7 @@ const LANGS = {
     signature:'Signature',
     disclaimer:'Please let your server know about any allergies. Dishes are prepared in a kitchen that handles all 14 listed allergens.',
     noAllergens:'None of the 14 listed allergens.',
-    pairsWith:'Pairs with', search:'Search dishes', coeliac:"I'm coeliac",
+    pairsWith:'Pairs with', search:'Search dishes', coeliac:"I'm celiac",
     filters:'Filters', dietary:'Dietary', freeFrom:'Free from', clearFilters:'Clear',
     vegetarian:'Vegetarian', vegan:'Vegan',
     noMatch:'No dishes match these filters.',
@@ -518,11 +518,11 @@ function FilterBar({ theme, filters, onToggle, onClear, count, shown, query, onQ
             style={{ width:'100%', boxSizing:'border-box', padding:'9px 34px 9px 32px', borderRadius:999, border:'1.5px solid var(--line)', background:'var(--surface)', color:'var(--text)', fontFamily:'var(--font-body)', fontSize:13, outline:'none' }} />
           {query && <button onClick={() => onQuery('')} aria-label="clear search" style={{ position:'absolute', right:8, width:20, height:20, border:'none', borderRadius:'50%', cursor:'pointer', background:'var(--pill-bg)', color:'var(--pill-ink)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:13, lineHeight:1, padding:0 }}>×</button>}
         </div>
-        <button onClick={() => onToggle('free','GL')} aria-pressed={filters.free.includes('GL')} style={{ display:'inline-flex', alignItems:'center', gap:6, cursor:'pointer', borderRadius:999, padding:'9px 13px', fontFamily:'var(--font-body)', fontSize:12.5, fontWeight:600, whiteSpace:'nowrap', flexShrink:0, border:filters.free.includes('GL')?'1.5px solid var(--primary)':'1.5px solid var(--line)', background:filters.free.includes('GL')?'var(--primary)':'var(--surface)', color:filters.free.includes('GL')?'var(--on-primary)':'var(--text)', transition:'background .15s, color .15s' }}>
-          <img src="images/allergens/gluten.png" alt="" style={{ width:15, height:15, objectFit:'contain', filter:filters.free.includes('GL')?'brightness(0) invert(1)':'none' }} />
+        <button onClick={() => onToggle('free','GL')} aria-pressed={filters.free.includes('GL')} style={{ display:'inline-flex', alignItems:'center', gap:5, cursor:'pointer', borderRadius:999, padding:'8px 10px', fontFamily:'var(--font-body)', fontSize:12, fontWeight:600, whiteSpace:'nowrap', flexShrink:0, border:filters.free.includes('GL')?'1.5px solid var(--primary)':'1.5px solid var(--line)', background:filters.free.includes('GL')?'var(--primary)':'var(--surface)', color:filters.free.includes('GL')?'var(--on-primary)':'var(--text)', transition:'background .15s, color .15s' }}>
+          <img src="images/allergens/gluten.png" alt="" style={{ width:14, height:14, objectFit:'contain', filter:filters.free.includes('GL')?'brightness(0) invert(1)':'none' }} />
           {t.coeliac}
         </button>
-        <button onClick={() => setOpen(o => !o)} style={{ display:'inline-flex', alignItems:'center', gap:8, cursor:'pointer', borderRadius:999, padding:'9px 14px', border:'1.5px solid var(--accent)', background:count?'var(--accent)':'transparent', color:count?'var(--accent-ink)':'var(--text)', fontFamily:'var(--font-body)', fontSize:12, fontWeight:700, letterSpacing:'0.1em', textTransform:'uppercase', whiteSpace:'nowrap', flexShrink:0 }}>
+        <button onClick={() => setOpen(o => !o)} style={{ display:'inline-flex', alignItems:'center', gap:6, cursor:'pointer', borderRadius:999, padding:'8px 11px', border:'1.5px solid var(--accent)', background:count?'var(--accent)':'transparent', color:count?'var(--accent-ink)':'var(--text)', fontFamily:'var(--font-body)', fontSize:11.5, fontWeight:700, letterSpacing:'0.08em', textTransform:'uppercase', whiteSpace:'nowrap', flexShrink:0 }}>
           <svg width="13" height="13" viewBox="0 0 14 14" style={{ transform:open?'rotate(180deg)':'none', transition:'transform .2s' }}><path d="M2 4l5 5 5-5" stroke="currentColor" strokeWidth="1.7" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>
           {t.filters}{count ? ` · ${count}` : ''}
         </button>
