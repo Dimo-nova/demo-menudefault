@@ -1,0 +1,8 @@
+# Local editor / tooling
+.claude/
+.superpowers/
+
+# OS / dependencies
+.DS_Store
+Thumbs.db
+node_modules/
