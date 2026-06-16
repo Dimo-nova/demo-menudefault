@@ -32,7 +32,8 @@
     -webkit-font-smoothing: antialiased;
   }
   #root {
-    height: 100vh;
+    height: 100vh;        /* fallback for older browsers */
+    height: 100dvh;       /* tracks the visible viewport (no dead scroll under the address bar) */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -571,7 +572,7 @@ function MenuApp() {
     (active === 'All' || d.cat === active) && dishPasses(d, filters) && matchesQuery(d, query, t)
   ).length, [active, filters, query, t]);
   return (
-    <div id="appcol" style={{ ...theme.vars, height:'100vh', width:'100%', maxWidth:720, position:'relative', display:'flex', flexDirection:'column', background:'var(--bg)', color:'var(--text)', boxShadow:'0 0 50px rgba(60,45,30,0.12)' }}>
+    <div id="appcol" style={{ ...theme.vars, height:'100%', width:'100%', maxWidth:720, position:'relative', display:'flex', flexDirection:'column', background:'var(--bg)', color:'var(--text)', boxShadow:'0 0 50px rgba(60,45,30,0.12)' }}>
       <Header theme={theme} t={t} />
       <Tabs theme={theme} cats={cats} active={active} onSelect={setActive} t={t} />
       <FilterBar theme={theme} filters={filters} onToggle={toggleFilter} onClear={clearFilters} count={filterCount} shown={visibleCount} query={query} onQuery={setQuery} t={t} />
