@@ -17,7 +17,7 @@ const CONFIG = {
   },
   monogram: 'B',     // 1–2 letters shown in the logo circle if no logoUrl
   logoUrl:  '',      // Optional: full URL to a logo image (PNG/SVG recommended)
-  currency: '€',
+  currency: '€',   // Currency symbol for prices, it changes position automatically for USD/GBP/EUR
 
   // ── Theme A colours (the warm demo — customise for each prospect) ───
   // Primary   → header background, active tabs, close button

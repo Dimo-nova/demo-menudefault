@@ -106,6 +106,7 @@ const LANGS = {
     close:'Close',
     popular:'Popular',
     signature:'Signature',
+    themeNames:{ A:'Earthy', B:'Minimal' },
     disclaimer:'Please let your server know about any allergies. Dishes are prepared in a kitchen that handles all 14 listed allergens.',
     noAllergens:'None of the 14 listed allergens.',
     pairsWith:'Pairs with', search:'Search dishes', coeliac:"I'm celiac",
@@ -124,6 +125,7 @@ const LANGS = {
     close:'Cerrar',
     popular:'Popular',
     signature:'Especial',
+    themeNames:{ A:'Cálido', B:'Minimalista' },
     disclaimer:'Informe a su camarero sobre cualquier alergia. Los platos se preparan en una cocina que maneja los 14 alérgenos indicados.',
     noAllergens:'Ninguno de los 14 alérgenos indicados.',
     pairsWith:'Marida con', search:'Buscar platos', coeliac:'Soy celíaco',
@@ -142,6 +144,7 @@ const LANGS = {
     close:'Schließen',
     popular:'Beliebt',
     signature:'Spezialität',
+    themeNames:{ A:'Gemütlich', B:'Minimalistisch' },
     disclaimer:'Bitte informieren Sie Ihren Kellner über Allergien. Gerichte werden in einer Küche zubereitet, die alle 14 aufgeführten Allergene verarbeitet.',
     noAllergens:'Keiner der 14 aufgeführten Allergene.',
     pairsWith:'Passt zu', search:'Gerichte suchen', coeliac:'Glutenfrei',
@@ -160,6 +163,7 @@ const LANGS = {
     close:'Fermer',
     popular:'Populaire',
     signature:'Signature',
+    themeNames:{ A:'Chaleureux', B:'Minimaliste' },
     disclaimer:'Veuillez informer votre serveur de toute allergie. Les plats sont préparés dans une cuisine qui manipule les 14 allergènes répertoriés.',
     noAllergens:'Aucun des 14 allergènes répertoriés.',
     pairsWith:"S'accorde avec", search:'Rechercher un plat', coeliac:'Je suis cœliaque',
@@ -176,6 +180,12 @@ const LANGS = {
 function dishText(field, t) {
   if (field && typeof field === 'object') return field[t.code] || field.EN || '';
   return field || '';
+}
+
+// Currency placement: some symbols sit after the amount ("12 €"), most before ("$12").
+const CURRENCY_AFTER = ['€', 'kr', 'zł', 'Kč', 'Ft', 'lei', 'p.', 'руб', '₽'];
+function fmtPrice(price, cur = CONFIG.currency) {
+  return CURRENCY_AFTER.includes(cur) ? `${price} ${cur}` : `${cur}${price}`;
 }
 
 function DishPhoto({ image, radius=14, style }) {
@@ -310,7 +320,7 @@ function DishCard({ theme, dish, onOpen, t }) {
         <div style={{ flex:1, minWidth:0, display:'flex', flexDirection:'column' }}>
           <div style={{ display:'flex', alignItems:'baseline', gap:10 }}>
             <div style={{ flex:1, fontFamily:'var(--font-display)', fontWeight:600, fontSize:m?19:16.5, lineHeight:1.12, color:'var(--text)', letterSpacing:'var(--name-spacing)' }}>{dishText(dish.name, t)}</div>
-            <div style={{ fontFamily:'var(--font-body)', fontWeight:m?500:700, fontSize:15, color:m?'var(--accent)':'var(--text)', whiteSpace:'nowrap' }}>{CONFIG.currency}{dish.price}</div>
+            <div style={{ fontFamily:'var(--font-body)', fontWeight:m?500:700, fontSize:15, color:m?'var(--accent)':'var(--text)', whiteSpace:'nowrap' }}>{fmtPrice(dish.price)}</div>
           </div>
           <div style={{ fontFamily:'var(--font-body)', fontSize:12.5, lineHeight:1.4, color:'var(--muted)', marginTop:4, display:'-webkit-box', WebkitLineClamp:2, WebkitBoxOrient:'vertical', overflow:'hidden' }}>{dishText(dish.desc, t)}</div>
           <AllergenChips codes={dish.allergens} t={t} />
@@ -391,7 +401,7 @@ function PairCard({ dish, onOpen, t }) {
       <DishPhoto image={dish.image} radius={9} style={{ width:42, height:42 }} />
       <div style={{ minWidth:0 }}>
         <div style={{ fontFamily:'var(--font-body)', fontSize:12.5, fontWeight:600, color:'var(--text)', lineHeight:1.15, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{dishText(dish.name, t)}</div>
-        <div style={{ fontFamily:'var(--font-body)', fontSize:11.5, color:'var(--accent)', marginTop:2 }}>{CONFIG.currency}{dish.price}</div>
+        <div style={{ fontFamily:'var(--font-body)', fontSize:11.5, color:'var(--accent)', marginTop:2 }}>{fmtPrice(dish.price)}</div>
       </div>
     </div>
   );
@@ -420,7 +430,7 @@ function DetailSheet({ theme, dish, onClose, onOpen, t }) {
           {dish.popular && <div style={{ marginBottom:7 }}><PopularBadge minimal={m} t={t} /></div>}
           <div style={{ display:'flex', alignItems:'flex-start', gap:12 }}>
             <div style={{ flex:1, fontFamily:'var(--font-display)', fontWeight:m?600:700, fontSize:m?27:23, lineHeight:1.08, color:'var(--text)', letterSpacing:'var(--name-spacing)' }}>{dishText(dish.name, t)}</div>
-            <div style={{ fontFamily:'var(--font-body)', fontWeight:m?500:700, fontSize:19, color:m?'var(--accent)':'var(--text)', whiteSpace:'nowrap', paddingTop:2 }}>{CONFIG.currency}{dish.price}</div>
+            <div style={{ fontFamily:'var(--font-body)', fontWeight:m?500:700, fontSize:19, color:m?'var(--accent)':'var(--text)', whiteSpace:'nowrap', paddingTop:2 }}>{fmtPrice(dish.price)}</div>
           </div>
           <div style={{ fontFamily:'var(--font-body)', fontSize:14, lineHeight:1.5, color:'var(--muted)', marginTop:10 }}>{dishText(dish.desc, t)}</div>
 
@@ -447,7 +457,8 @@ function DetailSheet({ theme, dish, onClose, onOpen, t }) {
   );
 }
 
-function ThemeToggle({ themeKey, onPick }) {
+function ThemeToggle({ themeKey, onPick, t }) {
+  const tn = (k) => (t.themeNames && t.themeNames[k]) || THEMES[k].name;
   const opt = (k, label, swatch) => {
     const on = k === themeKey;
     return (
@@ -459,8 +470,8 @@ function ThemeToggle({ themeKey, onPick }) {
   };
   return (
     <div style={{ position:'absolute', bottom:20, left:'50%', transform:'translateX(-50%)', zIndex:70, display:'flex', alignItems:'center', gap:2, padding:3, borderRadius:999, background:'rgba(22,17,13,0.74)', backdropFilter:'blur(14px) saturate(160%)', boxShadow:'0 8px 30px rgba(0,0,0,0.32), inset 0 0 0 0.5px rgba(255,255,255,0.16)' }}>
-      {opt('B', THEMES.B.name, THEMES.B.swatch)}
-      {opt('A', THEMES.A.name, THEMES.A.swatch)}
+      {opt('B', tn('B'), THEMES.B.swatch)}
+      {opt('A', tn('A'), THEMES.A.swatch)}
     </div>
   );
 }
@@ -582,7 +593,7 @@ function MenuApp() {
         <div style={{ height:96 }}></div>
       </div>
       {dish && <DetailSheet theme={theme} dish={dish} onClose={() => setDish(null)} onOpen={setDish} t={t} />}
-      <ThemeToggle themeKey={themeKey} onPick={setThemeKey} />
+      <ThemeToggle themeKey={themeKey} onPick={setThemeKey} t={t} />
       <LangPicker lang={lang} onPick={setLang} />
     </div>
   );
