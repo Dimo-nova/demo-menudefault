@@ -416,7 +416,7 @@ function DetailSheet({ theme, dish, onClose, onOpen, t }) {
   return (
     <div style={{ position:'absolute', inset:0, zIndex:80 }}>
       <div onClick={close} style={{ position:'absolute', inset:0, background:'rgba(18,12,8,0.42)', opacity:shown?1:0, transition:'opacity .26s ease', backdropFilter:'blur(1.5px)' }}></div>
-      <div className="no-scrollbar" style={{ position:'absolute', left:0, right:0, bottom:0, background:'var(--bg)', borderTopLeftRadius:m?8:28, borderTopRightRadius:m?8:28, transform:shown?'translateY(0)':'translateY(101%)', transition:'transform .3s cubic-bezier(.32,.72,0,1)', maxHeight:'90%', overflowY:'auto', paddingBottom:28, boxShadow:'0 -10px 40px rgba(0,0,0,0.18)' }}>
+      <div className="no-scrollbar" style={{ position:'absolute', left:0, right:0, bottom:0, background:'var(--bg)', borderTopLeftRadius:m?8:28, borderTopRightRadius:m?8:28, transform:shown?'translateY(0)':'translateY(101%)', transition:'transform .3s cubic-bezier(.32,.72,0,1)', maxHeight:'80%', overflowY:'auto', paddingBottom:28, boxShadow:'0 -10px 40px rgba(0,0,0,0.18)' }}>
 
         {/* Full-bleed photo banner with overlaid close */}
         <div style={{ position:'relative' }}>
