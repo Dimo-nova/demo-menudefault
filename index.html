@@ -458,20 +458,40 @@ function DetailSheet({ theme, dish, onClose, onOpen, t }) {
 }
 
 function ThemeToggle({ themeKey, onPick, t }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+  useEffect(() => {
+    if (!open) return;
+    const onDoc = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
+    const onEsc = (e) => { if (e.key === 'Escape') setOpen(false); };
+    document.addEventListener('pointerdown', onDoc, true);
+    document.addEventListener('keydown', onEsc, true);
+    return () => { document.removeEventListener('pointerdown', onDoc, true); document.removeEventListener('keydown', onEsc, true); };
+  }, [open]);
   const tn = (k) => (t.themeNames && t.themeNames[k]) || THEMES[k].name;
-  const opt = (k, label, swatch) => {
-    const on = k === themeKey;
-    return (
-      <button key={k} onClick={() => onPick(k)} style={{ display:'flex', alignItems:'center', gap:8, border:'none', cursor:'pointer', padding:'7px 12px', borderRadius:999, background:on?'rgba(255,255,255,0.18)':'transparent', transition:'background .18s ease' }}>
-        <span style={{ width:16, height:16, borderRadius:'50%', background:`linear-gradient(135deg, ${swatch[0]} 0 50%, ${swatch[1]} 50% 100%)`, boxShadow:'inset 0 0 0 1px rgba(255,255,255,0.25)' }}></span>
-        <span style={{ fontFamily:"'DM Sans', system-ui, sans-serif", fontSize:12.5, fontWeight:on?600:500, color:on?'#fff':'rgba(255,255,255,0.6)' }}>{label}</span>
-      </button>
-    );
-  };
+  const glass = { background:'rgba(22,17,13,0.82)', backdropFilter:'blur(14px) saturate(160%)', WebkitBackdropFilter:'blur(14px) saturate(160%)' };
+  const swatchDot = (swatch, size) => <span style={{ width:size, height:size, borderRadius:'50%', background:`linear-gradient(135deg, ${swatch[0]} 0 50%, ${swatch[1]} 50% 100%)`, boxShadow:'inset 0 0 0 1px rgba(255,255,255,0.25)', flexShrink:0 }}></span>;
+  const cur = THEMES[themeKey] || THEMES.A;
   return (
-    <div style={{ position:'absolute', bottom:20, left:'50%', transform:'translateX(-50%)', zIndex:70, display:'flex', alignItems:'center', gap:2, padding:3, borderRadius:999, background:'rgba(22,17,13,0.74)', backdropFilter:'blur(14px) saturate(160%)', boxShadow:'0 8px 30px rgba(0,0,0,0.32), inset 0 0 0 0.5px rgba(255,255,255,0.16)' }}>
-      {opt('B', tn('B'), THEMES.B.swatch)}
-      {opt('A', tn('A'), THEMES.A.swatch)}
+    <div ref={ref} style={{ position:'absolute', bottom:20, left:'50%', transform:'translateX(-50%)', zIndex:70 }}>
+      <button onClick={() => setOpen(o => !o)} aria-haspopup="listbox" aria-expanded={open} style={{ display:'flex', alignItems:'center', gap:8, border:'none', cursor:'pointer', padding:'7px 12px', borderRadius:999, ...glass, boxShadow:'0 8px 30px rgba(0,0,0,0.32), inset 0 0 0 0.5px rgba(255,255,255,0.16)' }}>
+        {swatchDot(cur.swatch, 16)}
+        <span style={{ fontFamily:"'DM Sans', system-ui, sans-serif", fontSize:12.5, fontWeight:600, color:'#fff' }}>{tn(themeKey)}</span>
+        <svg width="11" height="11" viewBox="0 0 14 14" style={{ transform:open?'rotate(180deg)':'none', transition:'transform .2s' }}><path d="M2 4l5 5 5-5" stroke="rgba(255,255,255,0.8)" strokeWidth="1.7" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>
+      </button>
+      {open && (
+        <div role="listbox" style={{ position:'absolute', bottom:'calc(100% + 6px)', left:'50%', transform:'translateX(-50%)', minWidth:150, padding:4, borderRadius:12, ...glass, boxShadow:'0 12px 32px rgba(0,0,0,0.4), inset 0 0 0 0.5px rgba(255,255,255,0.14)', display:'flex', flexDirection:'column', gap:2 }}>
+          {Object.keys(THEMES).map(k => {
+            const on = k === themeKey;
+            return (
+              <button key={k} role="option" aria-selected={on} onClick={() => { onPick(k); setOpen(false); }} style={{ display:'flex', alignItems:'center', gap:9, width:'100%', border:'none', cursor:'pointer', padding:'7px 10px', borderRadius:8, background:on?'rgba(255,255,255,0.16)':'transparent', transition:'background .15s' }}>
+                {swatchDot(THEMES[k].swatch, 14)}
+                <span style={{ fontFamily:"'DM Sans', system-ui, sans-serif", fontSize:13, fontWeight:on?700:500, color:on?'#fff':'rgba(255,255,255,0.75)' }}>{tn(k)}</span>
+              </button>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

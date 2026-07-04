@@ -27,7 +27,9 @@ browser, no build step, no server required.
 ### Key facts
 - **Two existing themes** live in `THEMES` (in `index.html`): `A` = **Earthy** (warm, card
   style, reads its colours/fonts from `CONFIG`), `B` = **Minimal** (fixed, sparse, serif).
-  The bottom pill (`ThemeToggle`) switches them; default theme is set in `MenuApp`.
+  The bottom **dropdown** (`ThemeToggle`) switches them and lists every key in `THEMES`
+  automatically (object insertion order) — adding a theme needs no toggle-JSX edit.
+  Default theme is set in `MenuApp`.
 - **Four languages**: `LANGS` (EN, ES, FR, DE) in `index.html`. Dish `name`/`desc` are
   per-language objects `{ EN, ES, FR, DE }`, resolved by the `dishText(field, t)` helper
   (`EN` is the fallback). The tagline in `config.js` is the same per-language shape.
@@ -104,13 +106,9 @@ shadow/weight values above unless the brand calls for sharper/rounder.
 URL in `<head>` (the font-loader script). Cormorant Garamond, Jost, and the `CONFIG` fonts
 are already loaded.
 
-## 3. Show it in the toggle & default to it — `index.html`
-In `ThemeToggle`'s return, add `P` (keep all three):
-```js
-      {opt('P', THEMES.P.name, THEMES.P.swatch)}
-      {opt('B', THEMES.B.name, THEMES.B.swatch)}
-      {opt('A', THEMES.A.name, THEMES.A.swatch)}
-```
+## 3. Default to it — `index.html`
+`ThemeToggle` is a dropdown that lists every key in `THEMES` automatically (in object
+insertion order) — adding `P` to `THEMES` (step 2) is enough, no toggle JSX to edit.
 In `MenuApp`, make `P` the default (both fallbacks on that line):
 ```js
   const [themeKey, setThemeKey] = useState(() => { try { return localStorage.getItem('menu-theme') || 'P'; } catch { return 'P'; } });
