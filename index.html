@@ -49,6 +49,9 @@
 <!-- ── MENU DATA ─────────────────────────────────────────────────────── -->
 <script src="menuData.js"></script>
 
+<!-- ── THEME PRESETS — one per restaurant/lead, selected via ?theme= ──── -->
+<script src="themes.js"></script>
+
 <!-- ── React + Babel ──────────────────────────────────────────────────── -->
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin></script>
@@ -60,456 +63,6 @@ const { useState, useEffect, useLayoutEffect, useRef, useMemo } = React;
 
 const RESTAURANT = { name:CONFIG.name, monogram:CONFIG.monogram, tagline:CONFIG.tagline, logoUrl:CONFIG.logoUrl };
 
-const THEMES = {
-  A: {
-    key:'A', name:CONFIG.themeALabel||'Warm', minimal:false,
-    swatch:[CONFIG.primaryColor, CONFIG.accentColor],
-    vars:{
-      '--primary':CONFIG.primaryColor,'--on-primary':'#FBF1E8',
-      '--accent':CONFIG.accentColor,'--accent-ink':'#5A3410',
-      '--bg':CONFIG.bgColor,'--surface':'#FFFFFF','--surface-2':'#FBF6EE',
-      '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
-      '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
-      '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
-      '--shadow':'0 8px 20px rgba(80,45,30,0.07), 0 1.5px 3px rgba(80,45,30,0.05)',
-      '--shadow-bar':'0 6px 18px rgba(80,45,30,0.10)',
-      '--font-display':`'${CONFIG.headingFont}', system-ui, sans-serif`,
-      '--font-body':`'${CONFIG.bodyFont}', system-ui, sans-serif`,
-      '--display-weight':'700','--name-spacing':'-0.01em',
-    },
-  },
-  B: {
-    key:'B', name:'Minimal', minimal:true,
-    swatch:['#16120F','#BFA06A'],
-    vars:{
-      '--primary':'#16120F','--on-primary':'#F4EFE6',
-      '--accent':'#BFA06A','--accent-ink':'#FFFFFF',
-      '--bg':'#FFFFFF','--surface':'#FFFFFF','--surface-2':'#FAF9F6',
-      '--text':'#17130F','--muted':'#9A938B','--line':'rgba(23,19,15,0.11)',
-      '--pill-bg':'#F4F2ED','--pill-ink':'#8C857C',
-      '--card-radius':'4px','--img-radius':'3px','--chip-radius':'2px',
-      '--shadow':'none','--shadow-bar':'0 1px 0 rgba(23,19,15,0.08)',
-      '--font-display':"'Cormorant Garamond', Georgia, serif",
-      '--font-body':"'Jost', system-ui, sans-serif",
-      '--display-weight':'600','--name-spacing':'0',
-    },
-  },
-  HX46: {
-    key:'HX46', name:"HX46 Caf\u00e9", minimal:false,
-    swatch:['#2B2117', '#B23A2E'],
-    identity:{ name:"HX46 Caf\u00e9", monogram:"HX", tagline:"Pan-Asian kitchen & coffee \u00b7 Goatstown", logoUrl:'' },
-    vars:{
-      '--primary':'#2B2117','--on-primary':'#FBF7F0',
-      '--accent':'#B23A2E','--accent-ink':'#FFFFFF',
-      '--bg':'#FBF7F0','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
-      '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
-      '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
-      '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
-      '--shadow':'0 8px 20px rgba(60,45,30,0.07), 0 1.5px 3px rgba(60,45,30,0.05)',
-      '--shadow-bar':'0 6px 18px rgba(60,45,30,0.10)',
-      '--font-display':"'Bricolage Grotesque', system-ui, sans-serif",
-      '--font-body':"'DM Sans', system-ui, sans-serif",
-      '--display-weight':'700','--name-spacing':'-0.01em',
-    },
-  },
-  GRV: {
-    key:'GRV', name:"Greenville Deli", minimal:false,
-    swatch:['#33503B', '#9C7A4E'],
-    identity:{ name:"Greenville Deli", monogram:"GD", tagline:"Deli \u00b7 sandwiches & coffee \u00b7 Goatstown", logoUrl:'' },
-    vars:{
-      '--primary':'#33503B','--on-primary':'#F7F1E6',
-      '--accent':'#9C7A4E','--accent-ink':'#FFFFFF',
-      '--bg':'#F7F1E6','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
-      '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
-      '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
-      '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
-      '--shadow':'0 8px 20px rgba(60,45,30,0.07), 0 1.5px 3px rgba(60,45,30,0.05)',
-      '--shadow-bar':'0 6px 18px rgba(60,45,30,0.10)',
-      '--font-display':"'Bricolage Grotesque', system-ui, sans-serif",
-      '--font-body':"'DM Sans', system-ui, sans-serif",
-      '--display-weight':'700','--name-spacing':'-0.01em',
-    },
-  },
-  GRND: {
-    key:'GRND', name:"Grounded", minimal:false,
-    swatch:['#4E5C42', '#8B9A76'],
-    identity:{ name:"Grounded", monogram:"G", tagline:"Speciality coffee \u00b7 Clonskeagh", logoUrl:'' },
-    vars:{
-      '--primary':'#4E5C42','--on-primary':'#FAF4EA',
-      '--accent':'#8B9A76','--accent-ink':'#22281A',
-      '--bg':'#FAF4EA','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
-      '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
-      '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
-      '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
-      '--shadow':'0 8px 20px rgba(60,45,30,0.07), 0 1.5px 3px rgba(60,45,30,0.05)',
-      '--shadow-bar':'0 6px 18px rgba(60,45,30,0.10)',
-      '--font-display':"'Bricolage Grotesque', system-ui, sans-serif",
-      '--font-body':"'DM Sans', system-ui, sans-serif",
-      '--display-weight':'700','--name-spacing':'-0.01em',
-    },
-  },
-  GOAT: {
-    key:'GOAT', name:"The Goat Bar & Grill", minimal:false,
-    swatch:['#2B2117', '#B08A3E'],
-    identity:{ name:"The Goat Bar & Grill", monogram:"TG", tagline:"Bar & grill \u00b7 Goatstown", logoUrl:'' },
-    vars:{
-      '--primary':'#2B2117','--on-primary':'#F5EEDF',
-      '--accent':'#B08A3E','--accent-ink':'#2A2113',
-      '--bg':'#F3ECDD','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
-      '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
-      '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
-      '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
-      '--shadow':'0 8px 20px rgba(60,45,30,0.07), 0 1.5px 3px rgba(60,45,30,0.05)',
-      '--shadow-bar':'0 6px 18px rgba(60,45,30,0.10)',
-      '--font-display':"'Cormorant Garamond', Georgia, serif",
-      '--font-body':"'Jost', system-ui, sans-serif",
-      '--display-weight':'600','--name-spacing':'-0.01em',
-    },
-  },
-  FIRE: {
-    key:'FIRE', name:"Fired Up Pizza", minimal:false,
-    swatch:['#221E1B', '#E1622C'],
-    identity:{ name:"Fired Up Pizza", monogram:"FU", tagline:"Wood-fired pizza \u00b7 Goatstown", logoUrl:'' },
-    vars:{
-      '--primary':'#221E1B','--on-primary':'#F4E9DA',
-      '--accent':'#E1622C','--accent-ink':'#FFFFFF',
-      '--bg':'#F4E9DA','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
-      '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
-      '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
-      '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
-      '--shadow':'0 8px 20px rgba(60,45,30,0.07), 0 1.5px 3px rgba(60,45,30,0.05)',
-      '--shadow-bar':'0 6px 18px rgba(60,45,30,0.10)',
-      '--font-display':"'Bricolage Grotesque', system-ui, sans-serif",
-      '--font-body':"'DM Sans', system-ui, sans-serif",
-      '--display-weight':'700','--name-spacing':'-0.01em',
-    },
-  },
-  FOIR: {
-    key:'FOIR', name:"Foirfe Coffee", minimal:false,
-    swatch:['#2B2117', '#6E7355'],
-    identity:{ name:"Foirfe Coffee", monogram:"F", tagline:"Speciality coffee \u00b7 Goatstown", logoUrl:'' },
-    vars:{
-      '--primary':'#2B2117','--on-primary':'#FAF4EA',
-      '--accent':'#6E7355','--accent-ink':'#FFFFFF',
-      '--bg':'#FAF4EA','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
-      '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
-      '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
-      '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
-      '--shadow':'0 8px 20px rgba(60,45,30,0.07), 0 1.5px 3px rgba(60,45,30,0.05)',
-      '--shadow-bar':'0 6px 18px rgba(60,45,30,0.10)',
-      '--font-display':"'Bricolage Grotesque', system-ui, sans-serif",
-      '--font-body':"'DM Sans', system-ui, sans-serif",
-      '--display-weight':'700','--name-spacing':'-0.01em',
-    },
-  },
-  TTG: {
-    key:'TTG', name:"Thru the Green", minimal:false,
-    swatch:['#2F5E3A', '#5A8C4A'],
-    identity:{ name:"Thru the Green", monogram:"T", tagline:"Drive-through coffee \u00b7 Windy Arbour", logoUrl:'' },
-    vars:{
-      '--primary':'#2F5E3A','--on-primary':'#F5F3EC',
-      '--accent':'#5A8C4A','--accent-ink':'#FFFFFF',
-      '--bg':'#F5F3EC','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
-      '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
-      '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
-      '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
-      '--shadow':'0 8px 20px rgba(60,45,30,0.07), 0 1.5px 3px rgba(60,45,30,0.05)',
-      '--shadow-bar':'0 6px 18px rgba(60,45,30,0.10)',
-      '--font-display':"'Bricolage Grotesque', system-ui, sans-serif",
-      '--font-body':"'DM Sans', system-ui, sans-serif",
-      '--display-weight':'700','--name-spacing':'-0.01em',
-    },
-  },
-  EGGS: {
-    key:'EGGS', name:"Eggsactly", minimal:false,
-    swatch:['#C25A38', '#4E7A4A'],
-    identity:{ name:"Eggsactly", monogram:"E", tagline:"Weekend brunch \u00b7 Churchtown", logoUrl:'' },
-    vars:{
-      '--primary':'#C25A38','--on-primary':'#FFF3EC',
-      '--accent':'#4E7A4A','--accent-ink':'#FFFFFF',
-      '--bg':'#FBF3EC','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
-      '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
-      '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
-      '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
-      '--shadow':'0 8px 20px rgba(60,45,30,0.07), 0 1.5px 3px rgba(60,45,30,0.05)',
-      '--shadow-bar':'0 6px 18px rgba(60,45,30,0.10)',
-      '--font-display':"'Bricolage Grotesque', system-ui, sans-serif",
-      '--font-body':"'DM Sans', system-ui, sans-serif",
-      '--display-weight':'700','--name-spacing':'-0.01em',
-    },
-  },
-  STRT: {
-    key:'STRT', name:"Street", minimal:false,
-    swatch:['#2B2117', '#C86B2B'],
-    identity:{ name:"Street", monogram:"S", tagline:"Modern Indian \u00b7 Clonskeagh", logoUrl:'' },
-    vars:{
-      '--primary':'#2B2117','--on-primary':'#F7F1E6',
-      '--accent':'#C86B2B','--accent-ink':'#2A160A',
-      '--bg':'#F7F1E6','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
-      '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
-      '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
-      '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
-      '--shadow':'0 8px 20px rgba(60,45,30,0.07), 0 1.5px 3px rgba(60,45,30,0.05)',
-      '--shadow-bar':'0 6px 18px rgba(60,45,30,0.10)',
-      '--font-display':"'Cormorant Garamond', Georgia, serif",
-      '--font-body':"'Jost', system-ui, sans-serif",
-      '--display-weight':'600','--name-spacing':'-0.01em',
-    },
-  },
-  COMM: {
-    key:'COMM', name:"Community Coffee", minimal:false,
-    swatch:['#B85C38', '#3E352B'],
-    identity:{ name:"Community Coffee", monogram:"CC", tagline:"Neighbourhood coffee \u00b7 Dundrum", logoUrl:'' },
-    vars:{
-      '--primary':'#B85C38','--on-primary':'#FAF4EA',
-      '--accent':'#3E352B','--accent-ink':'#FAF4EA',
-      '--bg':'#FAF4EA','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
-      '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
-      '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
-      '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
-      '--shadow':'0 8px 20px rgba(60,45,30,0.07), 0 1.5px 3px rgba(60,45,30,0.05)',
-      '--shadow-bar':'0 6px 18px rgba(60,45,30,0.10)',
-      '--font-display':"'Bricolage Grotesque', system-ui, sans-serif",
-      '--font-body':"'DM Sans', system-ui, sans-serif",
-      '--display-weight':'700','--name-spacing':'-0.01em',
-    },
-  },
-  HELI: {
-    key:'HELI', name:"Helios Coffee", minimal:false,
-    swatch:['#5E6B4A', '#C9922E'],
-    identity:{ name:"Helios Coffee", monogram:"H", tagline:"Coffee & sauna \u00b7 Dundrum", logoUrl:'' },
-    vars:{
-      '--primary':'#5E6B4A','--on-primary':'#FAF4EA',
-      '--accent':'#C9922E','--accent-ink':'#2A2113',
-      '--bg':'#FAF4EA','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
-      '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
-      '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
-      '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
-      '--shadow':'0 8px 20px rgba(60,45,30,0.07), 0 1.5px 3px rgba(60,45,30,0.05)',
-      '--shadow-bar':'0 6px 18px rgba(60,45,30,0.10)',
-      '--font-display':"'Bricolage Grotesque', system-ui, sans-serif",
-      '--font-body':"'DM Sans', system-ui, sans-serif",
-      '--display-weight':'700','--name-spacing':'-0.01em',
-    },
-  },
-  ESSN: {
-    key:'ESSN', name:"Essence Patisserie", minimal:false,
-    swatch:['#2B2117', '#C2A25A'],
-    identity:{ name:"Essence Patisserie", monogram:"EP", tagline:"Patisserie & caf\u00e9 \u00b7 Dundrum", logoUrl:'' },
-    vars:{
-      '--primary':'#2B2117','--on-primary':'#FAF4EA',
-      '--accent':'#C2A25A','--accent-ink':'#2A2113',
-      '--bg':'#FAF4EA','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
-      '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
-      '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
-      '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
-      '--shadow':'0 8px 20px rgba(60,45,30,0.07), 0 1.5px 3px rgba(60,45,30,0.05)',
-      '--shadow-bar':'0 6px 18px rgba(60,45,30,0.10)',
-      '--font-display':"'Cormorant Garamond', Georgia, serif",
-      '--font-body':"'Jost', system-ui, sans-serif",
-      '--display-weight':'600','--name-spacing':'-0.01em',
-    },
-  },
-  PYE: {
-    key:'PYE', name:"PYE", minimal:false,
-    swatch:['#221E1B', '#1FA6A0'],
-    identity:{ name:"PYE", monogram:"P", tagline:"Bar \u00b7 pizza & flatbreads \u00b7 Dundrum", logoUrl:'' },
-    vars:{
-      '--primary':'#221E1B','--on-primary':'#F4E9DA',
-      '--accent':'#1FA6A0','--accent-ink':'#04302E',
-      '--bg':'#F2ECE2','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
-      '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
-      '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
-      '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
-      '--shadow':'0 8px 20px rgba(60,45,30,0.07), 0 1.5px 3px rgba(60,45,30,0.05)',
-      '--shadow-bar':'0 6px 18px rgba(60,45,30,0.10)',
-      '--font-display':"'Bricolage Grotesque', system-ui, sans-serif",
-      '--font-body':"'DM Sans', system-ui, sans-serif",
-      '--display-weight':'700','--name-spacing':'-0.01em',
-    },
-  },
-  DUND: {
-    key:'DUND', name:"Dundrum House", minimal:false,
-    swatch:['#2B2117', '#2F4A3A'],
-    identity:{ name:"Dundrum House", monogram:"DH", tagline:"Village pub & kitchen \u00b7 Dundrum", logoUrl:'' },
-    vars:{
-      '--primary':'#2B2117','--on-primary':'#F5EEDF',
-      '--accent':'#2F4A3A','--accent-ink':'#FFFFFF',
-      '--bg':'#F3ECDD','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
-      '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
-      '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
-      '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
-      '--shadow':'0 8px 20px rgba(60,45,30,0.07), 0 1.5px 3px rgba(60,45,30,0.05)',
-      '--shadow-bar':'0 6px 18px rgba(60,45,30,0.10)',
-      '--font-display':"'Cormorant Garamond', Georgia, serif",
-      '--font-body':"'Jost', system-ui, sans-serif",
-      '--display-weight':'600','--name-spacing':'-0.01em',
-    },
-  },
-  COWB: {
-    key:'COWB', name:"Cowboy Steakhouse", minimal:false,
-    swatch:['#221E1B', '#9B2D2D'],
-    identity:{ name:"Cowboy Steakhouse", monogram:"CB", tagline:"Steakhouse \u00b7 Dundrum", logoUrl:'' },
-    vars:{
-      '--primary':'#221E1B','--on-primary':'#F4E9DA',
-      '--accent':'#9B2D2D','--accent-ink':'#FFFFFF',
-      '--bg':'#F2ECE2','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
-      '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
-      '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
-      '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
-      '--shadow':'0 8px 20px rgba(60,45,30,0.07), 0 1.5px 3px rgba(60,45,30,0.05)',
-      '--shadow-bar':'0 6px 18px rgba(60,45,30,0.10)',
-      '--font-display':"'Cormorant Garamond', Georgia, serif",
-      '--font-body':"'Jost', system-ui, sans-serif",
-      '--display-weight':'600','--name-spacing':'-0.01em',
-    },
-  },
-  BRCK: {
-    key:'BRCK', name:"Brickyard Gastropub", minimal:false,
-    swatch:['#2B2117', '#A5482B'],
-    identity:{ name:"Brickyard Gastropub", monogram:"BY", tagline:"Craft-beer gastropub \u00b7 Dundrum", logoUrl:'' },
-    vars:{
-      '--primary':'#2B2117','--on-primary':'#F4E9DA',
-      '--accent':'#A5482B','--accent-ink':'#FFFFFF',
-      '--bg':'#F3ECDD','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
-      '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
-      '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
-      '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
-      '--shadow':'0 8px 20px rgba(60,45,30,0.07), 0 1.5px 3px rgba(60,45,30,0.05)',
-      '--shadow-bar':'0 6px 18px rgba(60,45,30,0.10)',
-      '--font-display':"'Bricolage Grotesque', system-ui, sans-serif",
-      '--font-body':"'DM Sans', system-ui, sans-serif",
-      '--display-weight':'700','--name-spacing':'-0.01em',
-    },
-  },
-  GRIN: {
-    key:'GRIN', name:"Grindstone Coffee", minimal:false,
-    swatch:['#3F5B45', '#B98E5A'],
-    identity:{ name:"Grindstone Coffee", monogram:"GS", tagline:"Speciality coffee \u00b7 Dundrum", logoUrl:'' },
-    vars:{
-      '--primary':'#3F5B45','--on-primary':'#F7F1E6',
-      '--accent':'#B98E5A','--accent-ink':'#2A1E12',
-      '--bg':'#F7F1E6','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
-      '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
-      '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
-      '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
-      '--shadow':'0 8px 20px rgba(60,45,30,0.07), 0 1.5px 3px rgba(60,45,30,0.05)',
-      '--shadow-bar':'0 6px 18px rgba(60,45,30,0.10)',
-      '--font-display':"'Bricolage Grotesque', system-ui, sans-serif",
-      '--font-body':"'DM Sans', system-ui, sans-serif",
-      '--display-weight':'700','--name-spacing':'-0.01em',
-    },
-  },
-  FARM: {
-    key:'FARM', name:"Farmer Browns", minimal:false,
-    swatch:['#6E4B2E', '#4E7A4A'],
-    identity:{ name:"Farmer Browns", monogram:"FB", tagline:"Gastro-pub & brunch \u00b7 Clonskeagh", logoUrl:'' },
-    vars:{
-      '--primary':'#6E4B2E','--on-primary':'#F7F1E6',
-      '--accent':'#4E7A4A','--accent-ink':'#FFFFFF',
-      '--bg':'#F7F1E6','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
-      '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
-      '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
-      '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
-      '--shadow':'0 8px 20px rgba(60,45,30,0.07), 0 1.5px 3px rgba(60,45,30,0.05)',
-      '--shadow-bar':'0 6px 18px rgba(60,45,30,0.10)',
-      '--font-display':"'Bricolage Grotesque', system-ui, sans-serif",
-      '--font-body':"'DM Sans', system-ui, sans-serif",
-      '--display-weight':'700','--name-spacing':'-0.01em',
-    },
-  },
-  CF105: {
-    key:'CF105', name:"Caf\u00e9 105", minimal:false,
-    swatch:['#2B2117', '#D97A5A'],
-    identity:{ name:"Caf\u00e9 105", monogram:"C5", tagline:"Brunch & coffee \u00b7 Clonskeagh", logoUrl:'' },
-    vars:{
-      '--primary':'#2B2117','--on-primary':'#FAF4EA',
-      '--accent':'#D97A5A','--accent-ink':'#FFFFFF',
-      '--bg':'#FAF4EA','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
-      '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
-      '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
-      '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
-      '--shadow':'0 8px 20px rgba(60,45,30,0.07), 0 1.5px 3px rgba(60,45,30,0.05)',
-      '--shadow-bar':'0 6px 18px rgba(60,45,30,0.10)',
-      '--font-display':"'Bricolage Grotesque', system-ui, sans-serif",
-      '--font-body':"'DM Sans', system-ui, sans-serif",
-      '--display-weight':'700','--name-spacing':'-0.01em',
-    },
-  },
-  WLDG: {
-    key:'WLDG', name:"Wilde & Green", minimal:false,
-    swatch:['#5E6B3F', '#C2A25A'],
-    identity:{ name:"Wilde & Green", monogram:"WG", tagline:"Caf\u00e9 & Italian deli \u00b7 Milltown", logoUrl:'' },
-    vars:{
-      '--primary':'#5E6B3F','--on-primary':'#F7F1E6',
-      '--accent':'#C2A25A','--accent-ink':'#2A2113',
-      '--bg':'#F7F1E6','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
-      '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
-      '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
-      '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
-      '--shadow':'0 8px 20px rgba(60,45,30,0.07), 0 1.5px 3px rgba(60,45,30,0.05)',
-      '--shadow-bar':'0 6px 18px rgba(60,45,30,0.10)',
-      '--font-display':"'Bricolage Grotesque', system-ui, sans-serif",
-      '--font-body':"'DM Sans', system-ui, sans-serif",
-      '--display-weight':'700','--name-spacing':'-0.01em',
-    },
-  },
-  ASHT: {
-    key:'ASHT', name:"Ashton's", minimal:false,
-    swatch:['#2B2117', '#B08A3E'],
-    identity:{ name:"Ashton's", monogram:"A", tagline:"Gastropub & restaurant \u00b7 Clonskeagh", logoUrl:'' },
-    vars:{
-      '--primary':'#2B2117','--on-primary':'#F5EEDF',
-      '--accent':'#B08A3E','--accent-ink':'#2A2113',
-      '--bg':'#F3ECDD','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
-      '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
-      '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
-      '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
-      '--shadow':'0 8px 20px rgba(60,45,30,0.07), 0 1.5px 3px rgba(60,45,30,0.05)',
-      '--shadow-bar':'0 6px 18px rgba(60,45,30,0.10)',
-      '--font-display':"'Cormorant Garamond', Georgia, serif",
-      '--font-body':"'Jost', system-ui, sans-serif",
-      '--display-weight':'600','--name-spacing':'-0.01em',
-    },
-  },
-  COSY: {
-    key:'COSY', name:"The Cosy Bean", minimal:false,
-    swatch:['#6B4A30', '#6E7355'],
-    identity:{ name:"The Cosy Bean", monogram:"C", tagline:"Neighbourhood coffee \u00b7 Churchtown", logoUrl:'' },
-    vars:{
-      '--primary':'#6B4A30','--on-primary':'#F7F1E6',
-      '--accent':'#6E7355','--accent-ink':'#FFFFFF',
-      '--bg':'#F7F1E6','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
-      '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
-      '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
-      '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
-      '--shadow':'0 8px 20px rgba(60,45,30,0.07), 0 1.5px 3px rgba(60,45,30,0.05)',
-      '--shadow-bar':'0 6px 18px rgba(60,45,30,0.10)',
-      '--font-display':"'Bricolage Grotesque', system-ui, sans-serif",
-      '--font-body':"'DM Sans', system-ui, sans-serif",
-      '--display-weight':'700','--name-spacing':'-0.01em',
-    },
-  },
-  HOWA: {
-    key:'HOWA', name:"Howards Way", minimal:false,
-    swatch:['#2E3A4A', '#B0863E'],
-    identity:{ name:"Howards Way", monogram:"HW", tagline:"Caf\u00e9 & restaurant \u00b7 Churchtown", logoUrl:'' },
-    vars:{
-      '--primary':'#2E3A4A','--on-primary':'#F4EFE6',
-      '--accent':'#B0863E','--accent-ink':'#2A2113',
-      '--bg':'#F4EFE6','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
-      '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
-      '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
-      '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
-      '--shadow':'0 8px 20px rgba(60,45,30,0.07), 0 1.5px 3px rgba(60,45,30,0.05)',
-      '--shadow-bar':'0 6px 18px rgba(60,45,30,0.10)',
-      '--font-display':"'Cormorant Garamond', Georgia, serif",
-      '--font-body':"'Jost', system-ui, sans-serif",
-      '--display-weight':'600','--name-spacing':'-0.01em',
-    },
-  },
-};
-
 const LANGS = {
   EN: {
     flagUrl:'https://flagcdn.com/gb.svg', code:'EN',
@@ -520,7 +73,6 @@ const LANGS = {
     close:'Close',
     popular:'Popular',
     signature:'Signature',
-    themeNames:{ A:'Earthy', B:'Minimal' },
     disclaimer:'Please let your server know about any allergies. Dishes are prepared in a kitchen that handles all 14 listed allergens.',
     noAllergens:'None of the 14 listed allergens.',
     pairsWith:'Pairs with', search:'Search dishes', coeliac:"I'm celiac",
@@ -539,7 +91,6 @@ const LANGS = {
     close:'Cerrar',
     popular:'Popular',
     signature:'Especial',
-    themeNames:{ A:'Cálido', B:'Minimalista' },
     disclaimer:'Informe a su camarero sobre cualquier alergia. Los platos se preparan en una cocina que maneja los 14 alérgenos indicados.',
     noAllergens:'Ninguno de los 14 alérgenos indicados.',
     pairsWith:'Marida con', search:'Buscar platos', coeliac:'Soy celíaco',
@@ -558,7 +109,6 @@ const LANGS = {
     close:'Schließen',
     popular:'Beliebt',
     signature:'Spezialität',
-    themeNames:{ A:'Gemütlich', B:'Minimalistisch' },
     disclaimer:'Bitte informieren Sie Ihren Kellner über Allergien. Gerichte werden in einer Küche zubereitet, die alle 14 aufgeführten Allergene verarbeitet.',
     noAllergens:'Keiner der 14 aufgeführten Allergene.',
     pairsWith:'Passt zu', search:'Gerichte suchen', coeliac:'Glutenfrei',
@@ -577,7 +127,6 @@ const LANGS = {
     close:'Fermer',
     popular:'Populaire',
     signature:'Signature',
-    themeNames:{ A:'Chaleureux', B:'Minimaliste' },
     disclaimer:'Veuillez informer votre serveur de toute allergie. Les plats sont préparés dans une cuisine qui manipule les 14 allergènes répertoriés.',
     noAllergens:'Aucun des 14 allergènes répertoriés.',
     pairsWith:"S'accorde avec", search:'Rechercher un plat', coeliac:'Je suis cœliaque',
@@ -872,45 +421,6 @@ function DetailSheet({ theme, dish, onClose, onOpen, t }) {
   );
 }
 
-function ThemeToggle({ themeKey, onPick, t }) {
-  const [open, setOpen] = useState(false);
-  const ref = useRef(null);
-  useEffect(() => {
-    if (!open) return;
-    const onDoc = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
-    const onEsc = (e) => { if (e.key === 'Escape') setOpen(false); };
-    document.addEventListener('pointerdown', onDoc, true);
-    document.addEventListener('keydown', onEsc, true);
-    return () => { document.removeEventListener('pointerdown', onDoc, true); document.removeEventListener('keydown', onEsc, true); };
-  }, [open]);
-  const tn = (k) => (t.themeNames && t.themeNames[k]) || THEMES[k].name;
-  const glass = { background:'rgba(22,17,13,0.82)', backdropFilter:'blur(14px) saturate(160%)', WebkitBackdropFilter:'blur(14px) saturate(160%)' };
-  const swatchDot = (swatch, size) => <span style={{ width:size, height:size, borderRadius:'50%', background:`linear-gradient(135deg, ${swatch[0]} 0 50%, ${swatch[1]} 50% 100%)`, boxShadow:'inset 0 0 0 1px rgba(255,255,255,0.25)', flexShrink:0 }}></span>;
-  const cur = THEMES[themeKey] || THEMES.A;
-  return (
-    <div ref={ref} style={{ position:'absolute', bottom:20, left:'50%', transform:'translateX(-50%)', zIndex:70 }}>
-      <button onClick={() => setOpen(o => !o)} aria-haspopup="listbox" aria-expanded={open} style={{ display:'flex', alignItems:'center', gap:8, border:'none', cursor:'pointer', padding:'7px 12px', borderRadius:999, ...glass, boxShadow:'0 8px 30px rgba(0,0,0,0.32), inset 0 0 0 0.5px rgba(255,255,255,0.16)' }}>
-        {swatchDot(cur.swatch, 16)}
-        <span style={{ fontFamily:"'DM Sans', system-ui, sans-serif", fontSize:12.5, fontWeight:600, color:'#fff' }}>{tn(themeKey)}</span>
-        <svg width="11" height="11" viewBox="0 0 14 14" style={{ transform:open?'rotate(180deg)':'none', transition:'transform .2s' }}><path d="M2 4l5 5 5-5" stroke="rgba(255,255,255,0.8)" strokeWidth="1.7" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>
-      </button>
-      {open && (
-        <div role="listbox" style={{ position:'absolute', bottom:'calc(100% + 6px)', left:'50%', transform:'translateX(-50%)', minWidth:150, padding:4, borderRadius:12, ...glass, boxShadow:'0 12px 32px rgba(0,0,0,0.4), inset 0 0 0 0.5px rgba(255,255,255,0.14)', display:'flex', flexDirection:'column', gap:2 }}>
-          {Object.keys(THEMES).map(k => {
-            const on = k === themeKey;
-            return (
-              <button key={k} role="option" aria-selected={on} onClick={() => { onPick(k); setOpen(false); }} style={{ display:'flex', alignItems:'center', gap:9, width:'100%', border:'none', cursor:'pointer', padding:'7px 10px', borderRadius:8, background:on?'rgba(255,255,255,0.16)':'transparent', transition:'background .15s' }}>
-                {swatchDot(THEMES[k].swatch, 14)}
-                <span style={{ fontFamily:"'DM Sans', system-ui, sans-serif", fontSize:13, fontWeight:on?700:500, color:on?'#fff':'rgba(255,255,255,0.75)' }}>{tn(k)}</span>
-              </button>
-            );
-          })}
-        </div>
-      )}
-    </div>
-  );
-}
-
 function LangPicker({ lang, onPick }) {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
@@ -996,7 +506,15 @@ function FilterBar({ theme, filters, onToggle, onClear, count, shown, query, onQ
 }
 
 function MenuApp() {
-  const [themeKey, setThemeKey] = useState(() => { try { return localStorage.getItem('menu-theme') || 'B'; } catch { return 'B'; } });
+  // Theme is chosen only via ?theme=KEY (see leads.html) — no switcher, no persistence, so a
+  // client's tab always shows the single theme it was opened with.
+  const themeKey = useMemo(() => {
+    try {
+      const p = new URLSearchParams(window.location.search).get('theme');
+      if (p && THEMES[p]) return p;
+    } catch {}
+    return 'B';
+  }, []);
   const [lang, setLang] = useState(() => { try { return localStorage.getItem('menu-lang') || 'EN'; } catch { return 'EN'; } });
   const [active, setActive] = useState('All');
   const [query, setQuery] = useState('');
@@ -1011,7 +529,6 @@ function MenuApp() {
   const theme = THEMES[themeKey];
   const t = LANGS[lang];
   _openDish = setDish;
-  useEffect(() => { try { localStorage.setItem('menu-theme', themeKey); } catch {} }, [themeKey]);
   useEffect(() => { try { localStorage.setItem('menu-lang', lang); } catch {} }, [lang]);
   const cats = useMemo(() => ['All', ...CATEGORIES], []);
   const visibleCount = useMemo(() => DISHES.filter(d =>
@@ -1028,7 +545,6 @@ function MenuApp() {
         <div style={{ height:96 }}></div>
       </div>
       {dish && <DetailSheet theme={theme} dish={dish} onClose={() => setDish(null)} onOpen={setDish} t={t} />}
-      <ThemeToggle themeKey={themeKey} onPick={setThemeKey} t={t} />
       <LangPicker lang={lang} onPick={setLang} />
     </div>
   );

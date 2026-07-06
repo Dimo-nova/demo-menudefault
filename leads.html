@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Menu Demo</title>
+
+<!-- Not linked from anywhere in the app — reachable only if you know this URL. -->
+<script src="config.js"></script>
+<script src="themes.js"></script>
+
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: #16120F;
+    color: #F4EFE6;
+    font-family: system-ui, sans-serif;
+    padding: 32px 20px 60px;
+  }
+  h1 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 4px;
+  }
+  p.sub {
+    margin: 0 0 28px;
+    font-size: 13px;
+    color: rgba(244,239,230,0.6);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: inherit;
+    text-decoration: none;
+    transition: background .15s ease;
+  }
+  .card:hover { background: rgba(255,255,255,0.1); }
+  .swatch {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2);
+  }
+  .name {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .key {
+    font-size: 11px;
+    color: rgba(244,239,230,0.5);
+    margin-top: 2px;
+  }
+</style>
+</head>
+<body>
+<h1>Menu demos</h1>
+<p class="sub">Opens each restaurant's menu in a new tab, locked to its own theme.</p>
+<div class="grid" id="grid"></div>
+
+<script>
+(function() {
+  var grid = document.getElementById('grid');
+  Object.keys(THEMES).forEach(function(key) {
+    var theme = THEMES[key];
+    var id = theme.identity || { name: CONFIG.name };
+    var a = document.createElement('a');
+    a.className = 'card';
+    a.href = 'index.html?theme=' + encodeURIComponent(key);
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+
+    var swatch = document.createElement('span');
+    swatch.className = 'swatch';
+    swatch.style.background = 'linear-gradient(135deg, ' + theme.swatch[0] + ' 0 50%, ' + theme.swatch[1] + ' 50% 100%)';
+
+    var text = document.createElement('span');
+    var name = document.createElement('div');
+    name.className = 'name';
+    name.textContent = id.name;
+    var keyLabel = document.createElement('div');
+    keyLabel.className = 'key';
+    keyLabel.textContent = theme.name + ' · ' + key;
+    text.appendChild(name);
+    text.appendChild(keyLabel);
+
+    a.appendChild(swatch);
+    a.appendChild(text);
+    grid.appendChild(a);
+  });
+})();
+</script>
+</body>
+</html>
