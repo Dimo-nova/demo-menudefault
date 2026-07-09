@@ -241,7 +241,7 @@ function Header({ theme, t }) {
     <div style={{ background:'var(--primary)', color:'var(--on-primary)', padding:'20px 20px 20px', flexShrink:0 }}>
       <div style={{ display:'flex', alignItems:'center', gap:14 }}>
         {id.logoUrl ? (
-          <img src={id.logoUrl} alt="" style={{ height:50, maxWidth:170, width:'auto', objectFit:'contain', flexShrink:0 }} />
+          <img src={id.logoUrl} alt="" style={{ height:50, maxWidth:170, width:'auto', objectFit:'contain', flexShrink:0, filter:theme.logoWhite?'brightness(0) invert(1)':'none' }} />
         ) : (
           <div style={{ width:50, height:50, borderRadius:m?4:'50%', flexShrink:0, display:'flex', alignItems:'center', justifyContent:'center', background:m?'transparent':'var(--accent)', border:m?'1.5px solid var(--accent)':'none', fontFamily:'var(--font-display)', fontWeight:m?600:700, fontSize:26, color:m?'var(--accent)':'var(--accent-ink)' }}>
             {id.monogram}

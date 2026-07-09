@@ -255,6 +255,7 @@ const THEMES = {
   },
   DUND: {
     key:'DUND', name:"Dundrum House", minimal:true,
+    logoWhite:true,
     swatch:['#2B2117', '#2F4A3A'],
     identity:{ name:"Dundrum House", monogram:"DH", tagline:"Village pub & kitchen \u00b7 Dundrum", logoUrl:'images/logos/DUND.png', heroUrl:'images/heroes/DUND.jpg' },
     vars:{
