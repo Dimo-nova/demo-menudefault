@@ -273,6 +273,7 @@ const THEMES = {
   },
   COWB: {
     key:'COWB', name:"Cowboy Steakhouse", minimal:true,
+    hideHeaderText:true,
     swatch:['#221E1B', '#9B2D2D'],
     identity:{ name:"Cowboy Steakhouse", monogram:"CB", tagline:"Steakhouse \u00b7 Dundrum", logoUrl:'images/logos/COWB.png', heroUrl:'images/heroes/COWB.jpg' },
     vars:{
@@ -291,6 +292,7 @@ const THEMES = {
   },
   BRCK: {
     key:'BRCK', name:"Brickyard Gastropub", minimal:true,
+    hideHeaderText:true,
     swatch:['#2B2117', '#A5482B'],
     identity:{ name:"Brickyard Gastropub", monogram:"BY", tagline:"Craft-beer gastropub \u00b7 Dundrum", logoUrl:'images/logos/BRCK.jpg', heroUrl:'images/heroes/BRCK.jpg' },
     vars:{
