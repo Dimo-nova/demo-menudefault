@@ -313,7 +313,8 @@ const THEMES = {
   GRIN: {
     key:'GRIN', name:"Grindstone Coffee", minimal:true,
     swatch:['#3F5B45', '#B98E5A'],
-    identity:{ name:"Grindstone Coffee", monogram:"GS", tagline:"Speciality coffee \u00b7 Dundrum", logoUrl:'', heroUrl:'images/heroes/GRIN.jpg' },
+    logoWhite:true, hideHeaderText:true,
+    identity:{ name:"Grindstone Coffee", monogram:"GS", tagline:"Speciality coffee \u00b7 Dundrum", logoUrl:'images/logos/grindstone_coffee_logo.png', heroUrl:'images/heroes/GRIN.jpg' },
     vars:{
       '--primary':'#3F5B45','--on-primary':'#F7F1E6',
       '--accent':'#B98E5A','--accent-ink':'#2A1E12',
