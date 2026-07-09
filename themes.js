@@ -218,6 +218,7 @@ const THEMES = {
   },
   ESSN: {
     key:'ESSN', name:"Essence Patisserie", minimal:true,
+    hideHeaderText:true,
     swatch:['#2B2117', '#C2A25A'],
     identity:{ name:"Essence Patisserie", monogram:"EP", tagline:"Patisserie & caf\u00e9 \u00b7 Dundrum", logoUrl:'images/logos/ESSN.png', heroUrl:'images/heroes/ESSN.jpg' },
     vars:{

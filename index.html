@@ -247,10 +247,12 @@ function Header({ theme, t }) {
             {id.monogram}
           </div>
         )}
-        <div style={{ flex:1, minWidth:0 }}>
-          <div style={{ fontFamily:'var(--font-display)', fontWeight:'var(--display-weight)', fontSize:m?27:23, lineHeight:1.05, letterSpacing:'var(--name-spacing)' }}>{id.name}</div>
-          <div style={{ fontFamily:'var(--font-body)', marginTop:m?5:3, fontSize:m?10.5:12.5, fontWeight:m?400:500, letterSpacing:m?'0.18em':'0.005em', textTransform:m?'uppercase':'none', color:'var(--on-primary)', opacity:0.72 }}>{dishText(id.tagline, t)}</div>
-        </div>
+        {!theme.hideHeaderText && (
+          <div style={{ flex:1, minWidth:0 }}>
+            <div style={{ fontFamily:'var(--font-display)', fontWeight:'var(--display-weight)', fontSize:m?27:23, lineHeight:1.05, letterSpacing:'var(--name-spacing)' }}>{id.name}</div>
+            <div style={{ fontFamily:'var(--font-body)', marginTop:m?5:3, fontSize:m?10.5:12.5, fontWeight:m?400:500, letterSpacing:m?'0.18em':'0.005em', textTransform:m?'uppercase':'none', color:'var(--on-primary)', opacity:0.72 }}>{dishText(id.tagline, t)}</div>
+          </div>
+        )}
       </div>
     </div>
   );
