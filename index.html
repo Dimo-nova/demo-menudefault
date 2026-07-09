@@ -240,9 +240,13 @@ function Header({ theme, t }) {
   return (
     <div style={{ background:'var(--primary)', color:'var(--on-primary)', padding:'20px 20px 20px', flexShrink:0 }}>
       <div style={{ display:'flex', alignItems:'center', gap:14 }}>
-        <div style={{ width:50, height:50, borderRadius:m?4:'50%', flexShrink:0, display:'flex', alignItems:'center', justifyContent:'center', background:m?'transparent':'var(--accent)', border:m?'1.5px solid var(--accent)':'none', fontFamily:'var(--font-display)', fontWeight:m?600:700, fontSize:26, color:m?'var(--accent)':'var(--accent-ink)', overflow:'hidden' }}>
-          {id.logoUrl ? <img src={id.logoUrl} alt="" style={{ width:'100%', height:'100%', objectFit:'cover' }} /> : id.monogram}
-        </div>
+        {id.logoUrl ? (
+          <img src={id.logoUrl} alt="" style={{ height:50, maxWidth:170, width:'auto', objectFit:'contain', flexShrink:0 }} />
+        ) : (
+          <div style={{ width:50, height:50, borderRadius:m?4:'50%', flexShrink:0, display:'flex', alignItems:'center', justifyContent:'center', background:m?'transparent':'var(--accent)', border:m?'1.5px solid var(--accent)':'none', fontFamily:'var(--font-display)', fontWeight:m?600:700, fontSize:26, color:m?'var(--accent)':'var(--accent-ink)' }}>
+            {id.monogram}
+          </div>
+        )}
         <div style={{ flex:1, minWidth:0 }}>
           <div style={{ fontFamily:'var(--font-display)', fontWeight:'var(--display-weight)', fontSize:m?27:23, lineHeight:1.05, letterSpacing:'var(--name-spacing)' }}>{id.name}</div>
           <div style={{ fontFamily:'var(--font-body)', marginTop:m?5:3, fontSize:m?10.5:12.5, fontWeight:m?400:500, letterSpacing:m?'0.18em':'0.005em', textTransform:m?'uppercase':'none', color:'var(--on-primary)', opacity:0.72 }}>{dishText(id.tagline, t)}</div>
