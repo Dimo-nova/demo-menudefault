@@ -218,6 +218,7 @@ const THEMES = {
   },
   ESSN: {
     key:'ESSN', name:"Essence Patisserie", minimal:true,
+    hideHeaderText:true,
     swatch:['#2B2117', '#C2A25A'],
     identity:{ name:"Essence Patisserie", monogram:"EP", tagline:"Patisserie & caf\u00e9 \u00b7 Dundrum", logoUrl:'images/logos/ESSN.png', heroUrl:'images/heroes/ESSN.jpg' },
     vars:{
@@ -254,6 +255,7 @@ const THEMES = {
   },
   DUND: {
     key:'DUND', name:"Dundrum House", minimal:true,
+    logoWhite:true,
     swatch:['#2B2117', '#2F4A3A'],
     identity:{ name:"Dundrum House", monogram:"DH", tagline:"Village pub & kitchen \u00b7 Dundrum", logoUrl:'images/logos/DUND.png', heroUrl:'images/heroes/DUND.jpg' },
     vars:{
@@ -272,6 +274,7 @@ const THEMES = {
   },
   COWB: {
     key:'COWB', name:"Cowboy Steakhouse", minimal:true,
+    hideHeaderText:true,
     swatch:['#221E1B', '#9B2D2D'],
     identity:{ name:"Cowboy Steakhouse", monogram:"CB", tagline:"Steakhouse \u00b7 Dundrum", logoUrl:'images/logos/COWB.png', heroUrl:'images/heroes/COWB.jpg' },
     vars:{
@@ -290,6 +293,7 @@ const THEMES = {
   },
   BRCK: {
     key:'BRCK', name:"Brickyard Gastropub", minimal:true,
+    hideHeaderText:true,
     swatch:['#2B2117', '#A5482B'],
     identity:{ name:"Brickyard Gastropub", monogram:"BY", tagline:"Craft-beer gastropub \u00b7 Dundrum", logoUrl:'images/logos/BRCK.jpg', heroUrl:'images/heroes/BRCK.jpg' },
     vars:{
