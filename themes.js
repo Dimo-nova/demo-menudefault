@@ -37,7 +37,7 @@ const THEMES = {
     },
   },
   HX46: {
-    key:'HX46', name:"HX46 Caf\u00e9", minimal:false,
+    key:'HX46', name:"HX46 Caf\u00e9", minimal:true,
     swatch:['#2B2117', '#B23A2E'],
     identity:{ name:"HX46 Caf\u00e9", monogram:"HX", tagline:"Pan-Asian kitchen & coffee \u00b7 Goatstown", logoUrl:'', heroUrl:'' },
     vars:{
@@ -55,7 +55,7 @@ const THEMES = {
     },
   },
   GRV: {
-    key:'GRV', name:"Greenville Deli", minimal:false,
+    key:'GRV', name:"Greenville Deli", minimal:true,
     swatch:['#33503B', '#9C7A4E'],
     identity:{ name:"Greenville Deli", monogram:"GD", tagline:"Deli \u00b7 sandwiches & coffee \u00b7 Goatstown", logoUrl:'images/logos/GRV.png', heroUrl:'' },
     vars:{
@@ -73,7 +73,7 @@ const THEMES = {
     },
   },
   GRND: {
-    key:'GRND', name:"Grounded", minimal:false,
+    key:'GRND', name:"Grounded", minimal:true,
     swatch:['#4E5C42', '#8B9A76'],
     identity:{ name:"Grounded", monogram:"G", tagline:"Speciality coffee \u00b7 Clonskeagh", logoUrl:'', heroUrl:'' },
     vars:{
@@ -91,7 +91,7 @@ const THEMES = {
     },
   },
   GOAT: {
-    key:'GOAT', name:"The Goat Bar & Grill", minimal:false,
+    key:'GOAT', name:"The Goat Bar & Grill", minimal:true,
     swatch:['#2B2117', '#B08A3E'],
     identity:{ name:"The Goat Bar & Grill", monogram:"TG", tagline:"Bar & grill \u00b7 Goatstown", logoUrl:'images/logos/GOAT.png', heroUrl:'' },
     vars:{
@@ -109,7 +109,7 @@ const THEMES = {
     },
   },
   FIRE: {
-    key:'FIRE', name:"Fired Up Pizza", minimal:false,
+    key:'FIRE', name:"Fired Up Pizza", minimal:true,
     swatch:['#221E1B', '#E1622C'],
     identity:{ name:"Fired Up Pizza", monogram:"FU", tagline:"Wood-fired pizza \u00b7 Goatstown", logoUrl:'images/logos/FIRE.png', heroUrl:'' },
     vars:{
@@ -127,7 +127,7 @@ const THEMES = {
     },
   },
   FOIR: {
-    key:'FOIR', name:"Foirfe Coffee", minimal:false,
+    key:'FOIR', name:"Foirfe Coffee", minimal:true,
     swatch:['#2B2117', '#6E7355'],
     identity:{ name:"Foirfe Coffee", monogram:"F", tagline:"Speciality coffee \u00b7 Goatstown", logoUrl:'', heroUrl:'' },
     vars:{
@@ -145,7 +145,7 @@ const THEMES = {
     },
   },
   TTG: {
-    key:'TTG', name:"Thru the Green", minimal:false,
+    key:'TTG', name:"Thru the Green", minimal:true,
     swatch:['#2F5E3A', '#5A8C4A'],
     identity:{ name:"Thru the Green", monogram:"T", tagline:"Drive-through coffee \u00b7 Windy Arbour", logoUrl:'', heroUrl:'' },
     vars:{
@@ -163,7 +163,7 @@ const THEMES = {
     },
   },
   EGGS: {
-    key:'EGGS', name:"Eggsactly", minimal:false,
+    key:'EGGS', name:"Eggsactly", minimal:true,
     swatch:['#C25A38', '#4E7A4A'],
     identity:{ name:"Eggsactly", monogram:"E", tagline:"Weekend brunch \u00b7 Churchtown", logoUrl:'', heroUrl:'' },
     vars:{
@@ -181,7 +181,7 @@ const THEMES = {
     },
   },
   STRT: {
-    key:'STRT', name:"Street", minimal:false,
+    key:'STRT', name:"Street", minimal:true,
     swatch:['#2B2117', '#C86B2B'],
     identity:{ name:"Street", monogram:"S", tagline:"Modern Indian \u00b7 Clonskeagh", logoUrl:'', heroUrl:'' },
     vars:{
@@ -199,7 +199,7 @@ const THEMES = {
     },
   },
   COMM: {
-    key:'COMM', name:"Community Coffee", minimal:false,
+    key:'COMM', name:"Community Coffee", minimal:true,
     swatch:['#B85C38', '#3E352B'],
     identity:{ name:"Community Coffee", monogram:"CC", tagline:"Neighbourhood coffee \u00b7 Dundrum", logoUrl:'', heroUrl:'' },
     vars:{
@@ -217,7 +217,7 @@ const THEMES = {
     },
   },
   HELI: {
-    key:'HELI', name:"Helios Coffee", minimal:false,
+    key:'HELI', name:"Helios Coffee", minimal:true,
     swatch:['#5E6B4A', '#C9922E'],
     identity:{ name:"Helios Coffee", monogram:"H", tagline:"Coffee & sauna \u00b7 Dundrum", logoUrl:'images/logos/HELI.png', heroUrl:'' },
     vars:{
@@ -235,7 +235,7 @@ const THEMES = {
     },
   },
   ESSN: {
-    key:'ESSN', name:"Essence Patisserie", minimal:false,
+    key:'ESSN', name:"Essence Patisserie", minimal:true,
     swatch:['#2B2117', '#C2A25A'],
     identity:{ name:"Essence Patisserie", monogram:"EP", tagline:"Patisserie & caf\u00e9 \u00b7 Dundrum", logoUrl:'', heroUrl:'' },
     vars:{
@@ -253,7 +253,7 @@ const THEMES = {
     },
   },
   PYE: {
-    key:'PYE', name:"PYE", minimal:false,
+    key:'PYE', name:"PYE", minimal:true,
     swatch:['#221E1B', '#1FA6A0'],
     identity:{ name:"PYE", monogram:"P", tagline:"Bar \u00b7 pizza & flatbreads \u00b7 Dundrum", logoUrl:'images/logos/PYE.png', heroUrl:'images/heroes/PYE.jpg' },
     vars:{
@@ -271,7 +271,7 @@ const THEMES = {
     },
   },
   DUND: {
-    key:'DUND', name:"Dundrum House", minimal:false,
+    key:'DUND', name:"Dundrum House", minimal:true,
     swatch:['#2B2117', '#2F4A3A'],
     identity:{ name:"Dundrum House", monogram:"DH", tagline:"Village pub & kitchen \u00b7 Dundrum", logoUrl:'', heroUrl:'' },
     vars:{
@@ -289,7 +289,7 @@ const THEMES = {
     },
   },
   COWB: {
-    key:'COWB', name:"Cowboy Steakhouse", minimal:false,
+    key:'COWB', name:"Cowboy Steakhouse", minimal:true,
     swatch:['#221E1B', '#9B2D2D'],
     identity:{ name:"Cowboy Steakhouse", monogram:"CB", tagline:"Steakhouse \u00b7 Dundrum", logoUrl:'', heroUrl:'' },
     vars:{
@@ -307,7 +307,7 @@ const THEMES = {
     },
   },
   BRCK: {
-    key:'BRCK', name:"Brickyard Gastropub", minimal:false,
+    key:'BRCK', name:"Brickyard Gastropub", minimal:true,
     swatch:['#2B2117', '#A5482B'],
     identity:{ name:"Brickyard Gastropub", monogram:"BY", tagline:"Craft-beer gastropub \u00b7 Dundrum", logoUrl:'images/logos/BRCK.jpg', heroUrl:'' },
     vars:{
@@ -325,7 +325,7 @@ const THEMES = {
     },
   },
   GRIN: {
-    key:'GRIN', name:"Grindstone Coffee", minimal:false,
+    key:'GRIN', name:"Grindstone Coffee", minimal:true,
     swatch:['#3F5B45', '#B98E5A'],
     identity:{ name:"Grindstone Coffee", monogram:"GS", tagline:"Speciality coffee \u00b7 Dundrum", logoUrl:'', heroUrl:'' },
     vars:{
@@ -343,7 +343,7 @@ const THEMES = {
     },
   },
   FARM: {
-    key:'FARM', name:"Farmer Browns", minimal:false,
+    key:'FARM', name:"Farmer Browns", minimal:true,
     swatch:['#6E4B2E', '#4E7A4A'],
     identity:{ name:"Farmer Browns", monogram:"FB", tagline:"Gastro-pub & brunch \u00b7 Clonskeagh", logoUrl:'images/logos/FARM.png', heroUrl:'images/heroes/FARM.jpg' },
     vars:{
@@ -361,7 +361,7 @@ const THEMES = {
     },
   },
   CF105: {
-    key:'CF105', name:"Caf\u00e9 105", minimal:false,
+    key:'CF105', name:"Caf\u00e9 105", minimal:true,
     swatch:['#2B2117', '#D97A5A'],
     identity:{ name:"Caf\u00e9 105", monogram:"C5", tagline:"Brunch & coffee \u00b7 Clonskeagh", logoUrl:'images/logos/CF105.jpg', heroUrl:'' },
     vars:{
@@ -379,7 +379,7 @@ const THEMES = {
     },
   },
   WLDG: {
-    key:'WLDG', name:"Wilde & Green", minimal:false,
+    key:'WLDG', name:"Wilde & Green", minimal:true,
     swatch:['#5E6B3F', '#C2A25A'],
     identity:{ name:"Wilde & Green", monogram:"WG", tagline:"Caf\u00e9 & Italian deli \u00b7 Milltown", logoUrl:'', heroUrl:'' },
     vars:{
@@ -397,7 +397,7 @@ const THEMES = {
     },
   },
   ASHT: {
-    key:'ASHT', name:"Ashton's", minimal:false,
+    key:'ASHT', name:"Ashton's", minimal:true,
     swatch:['#2B2117', '#B08A3E'],
     identity:{ name:"Ashton's", monogram:"A", tagline:"Gastropub & restaurant \u00b7 Clonskeagh", logoUrl:'images/logos/ASHT.webp', heroUrl:'' },
     vars:{
@@ -415,7 +415,7 @@ const THEMES = {
     },
   },
   COSY: {
-    key:'COSY', name:"The Cosy Bean", minimal:false,
+    key:'COSY', name:"The Cosy Bean", minimal:true,
     swatch:['#6B4A30', '#6E7355'],
     identity:{ name:"The Cosy Bean", monogram:"C", tagline:"Neighbourhood coffee \u00b7 Churchtown", logoUrl:'', heroUrl:'' },
     vars:{
@@ -433,7 +433,7 @@ const THEMES = {
     },
   },
   HOWA: {
-    key:'HOWA', name:"Howards Way", minimal:false,
+    key:'HOWA', name:"Howards Way", minimal:true,
     swatch:['#2E3A4A', '#B0863E'],
     identity:{ name:"Howards Way", monogram:"HW", tagline:"Caf\u00e9 & restaurant \u00b7 Churchtown", logoUrl:'images/logos/HOWA.png', heroUrl:'' },
     vars:{
