@@ -256,7 +256,7 @@ function Hero({ theme, t }) {
   const id = theme.identity || RESTAURANT;
   const heroUrl = id.heroUrl || '';
   return (
-    <div style={{ position:'relative', height:220, flexShrink:0, overflow:'hidden' }}>
+    <div style={{ position:'relative', height:220, overflow:'hidden' }}>
       <div style={{
         position:'absolute', inset:0,
         backgroundImage:`url('${heroUrl}'), repeating-linear-gradient(135deg, var(--primary) 0px, var(--primary) 26px, var(--accent) 26px, var(--accent) 52px)`,
@@ -560,10 +560,10 @@ function MenuApp() {
   return (
     <div id="appcol" style={{ ...theme.vars, height:'100%', width:'100%', maxWidth:720, position:'relative', display:'flex', flexDirection:'column', background:'var(--bg)', color:'var(--text)', boxShadow:'0 0 50px rgba(60,45,30,0.12)' }}>
       <Header theme={theme} t={t} />
-      <Hero theme={theme} t={t} />
       <Tabs theme={theme} cats={cats} active={active} onSelect={setActive} t={t} />
       <FilterBar theme={theme} filters={filters} onToggle={toggleFilter} onClear={clearFilters} count={filterCount} shown={visibleCount} query={query} onQuery={setQuery} t={t} />
       <div style={{ flex:1, overflowY:'auto', WebkitOverflowScrolling:'touch' }} className="no-scrollbar">
+        <Hero theme={theme} t={t} />
         <MenuList theme={theme} active={active} filters={filters} query={query} t={t} />
         <Legend theme={theme} t={t} />
         <div style={{ height:96 }}></div>
