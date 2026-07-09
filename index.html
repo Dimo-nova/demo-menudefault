@@ -562,8 +562,10 @@ function MenuApp() {
       <Header theme={theme} t={t} />
       <div style={{ flex:1, overflowY:'auto', WebkitOverflowScrolling:'touch' }} className="no-scrollbar">
         <Hero theme={theme} t={t} />
-        <Tabs theme={theme} cats={cats} active={active} onSelect={setActive} t={t} />
-        <FilterBar theme={theme} filters={filters} onToggle={toggleFilter} onClear={clearFilters} count={filterCount} shown={visibleCount} query={query} onQuery={setQuery} t={t} />
+        <div style={{ position:'sticky', top:0, zIndex:5 }}>
+          <Tabs theme={theme} cats={cats} active={active} onSelect={setActive} t={t} />
+          <FilterBar theme={theme} filters={filters} onToggle={toggleFilter} onClear={clearFilters} count={filterCount} shown={visibleCount} query={query} onQuery={setQuery} t={t} />
+        </div>
         <MenuList theme={theme} active={active} filters={filters} query={query} t={t} />
         <Legend theme={theme} t={t} />
         <div style={{ height:96 }}></div>
