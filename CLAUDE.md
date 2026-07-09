@@ -88,7 +88,7 @@ serif list layout.
   ABCD: {
     key:'ABCD', name:'Client Name', minimal:false,
     swatch:['#PRIMARY', '#ACCENT'],          // the two dots shown on the leads.html card
-    identity:{ name:'Client Name', monogram:'C', tagline:'Short tagline · Area', logoUrl:'' },
+    identity:{ name:'Client Name', monogram:'C', tagline:'Short tagline · Area', logoUrl:'', heroUrl:'' },
     vars:{
       '--primary':'#PRIMARY','--on-primary':'#TEXT_ON_PRIMARY',   // header/tabs/buttons + text on them
       '--accent':'#ACCENT','--accent-ink':'#TEXT_ON_ACCENT',      // logo/badge/price/Filters pill + text on them
@@ -104,9 +104,17 @@ serif list layout.
     },
   },
 ```
-`identity` is what the in-app `Header` shows for this theme (falls back to `config.js`'s
-`RESTAURANT` if omitted) — always set it for a real lead so the client's own name/tagline/
-monogram/logo appear, independent of the generic `CONFIG` identity.
+`identity` is what the in-app `Header` and `Hero` banner show for this theme (falls back to
+`config.js`'s `RESTAURANT` if omitted) — always set it for a real lead so the client's own
+name/tagline/monogram/logo appear, independent of the generic `CONFIG` identity.
+
+`heroUrl` is the full-bleed photo shown in the `Hero` banner just below the header — a real
+venue photo (exterior/interior/plated dish) works best; leave it `''` to show a clean
+gradient in the theme's own colours instead of a placeholder or stock photo. Same rule as
+`logoUrl`: only set it to a real, verified image — a wordmark graphic, a platform's generic
+icon (e.g. Instagram's own logo when scraping a profile that blocks unauthenticated access),
+or a site screenshot with nav/CTA baked in all look worse than the gradient fallback, so
+reject those rather than wiring them in.
 
 **Colour guidance:** `--primary` is the header/tabs/active-buttons; `--on-primary` must read
 clearly on it (usually a near-white/cream). `--accent` is the highlight (logo fill, Popular
