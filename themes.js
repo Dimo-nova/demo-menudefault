@@ -43,7 +43,7 @@ const THEMES = {
     vars:{
       '--primary':'#2B2117','--on-primary':'#FBF7F0',
       '--accent':'#B23A2E','--accent-ink':'#FFFFFF',
-      '--bg':'#FBF7F0','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
+      '--bg':'#FFFFFF','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
       '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
       '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
       '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
@@ -61,7 +61,7 @@ const THEMES = {
     vars:{
       '--primary':'#33503B','--on-primary':'#F7F1E6',
       '--accent':'#9C7A4E','--accent-ink':'#FFFFFF',
-      '--bg':'#F7F1E6','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
+      '--bg':'#FFFFFF','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
       '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
       '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
       '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
@@ -79,7 +79,7 @@ const THEMES = {
     vars:{
       '--primary':'#4E5C42','--on-primary':'#FAF4EA',
       '--accent':'#8B9A76','--accent-ink':'#22281A',
-      '--bg':'#FAF4EA','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
+      '--bg':'#FFFFFF','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
       '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
       '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
       '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
@@ -97,7 +97,7 @@ const THEMES = {
     vars:{
       '--primary':'#2B2117','--on-primary':'#F5EEDF',
       '--accent':'#B08A3E','--accent-ink':'#2A2113',
-      '--bg':'#F3ECDD','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
+      '--bg':'#FFFFFF','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
       '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
       '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
       '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
@@ -115,7 +115,7 @@ const THEMES = {
     vars:{
       '--primary':'#221E1B','--on-primary':'#F4E9DA',
       '--accent':'#E1622C','--accent-ink':'#FFFFFF',
-      '--bg':'#F4E9DA','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
+      '--bg':'#FFFFFF','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
       '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
       '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
       '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
@@ -133,7 +133,7 @@ const THEMES = {
     vars:{
       '--primary':'#2B2117','--on-primary':'#FAF4EA',
       '--accent':'#6E7355','--accent-ink':'#FFFFFF',
-      '--bg':'#FAF4EA','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
+      '--bg':'#FFFFFF','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
       '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
       '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
       '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
@@ -151,7 +151,7 @@ const THEMES = {
     vars:{
       '--primary':'#2F5E3A','--on-primary':'#F5F3EC',
       '--accent':'#5A8C4A','--accent-ink':'#FFFFFF',
-      '--bg':'#F5F3EC','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
+      '--bg':'#FFFFFF','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
       '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
       '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
       '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
@@ -169,7 +169,7 @@ const THEMES = {
     vars:{
       '--primary':'#C25A38','--on-primary':'#FFF3EC',
       '--accent':'#4E7A4A','--accent-ink':'#FFFFFF',
-      '--bg':'#FBF3EC','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
+      '--bg':'#FFFFFF','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
       '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
       '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
       '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
@@ -187,7 +187,7 @@ const THEMES = {
     vars:{
       '--primary':'#2B2117','--on-primary':'#F7F1E6',
       '--accent':'#C86B2B','--accent-ink':'#2A160A',
-      '--bg':'#F7F1E6','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
+      '--bg':'#FFFFFF','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
       '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
       '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
       '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
@@ -205,7 +205,7 @@ const THEMES = {
     vars:{
       '--primary':'#B85C38','--on-primary':'#FAF4EA',
       '--accent':'#3E352B','--accent-ink':'#FAF4EA',
-      '--bg':'#FAF4EA','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
+      '--bg':'#FFFFFF','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
       '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
       '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
       '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
@@ -223,7 +223,7 @@ const THEMES = {
     vars:{
       '--primary':'#5E6B4A','--on-primary':'#FAF4EA',
       '--accent':'#C9922E','--accent-ink':'#2A2113',
-      '--bg':'#FAF4EA','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
+      '--bg':'#FFFFFF','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
       '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
       '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
       '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
@@ -241,7 +241,7 @@ const THEMES = {
     vars:{
       '--primary':'#2B2117','--on-primary':'#FAF4EA',
       '--accent':'#C2A25A','--accent-ink':'#2A2113',
-      '--bg':'#FAF4EA','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
+      '--bg':'#FFFFFF','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
       '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
       '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
       '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
@@ -259,7 +259,7 @@ const THEMES = {
     vars:{
       '--primary':'#221E1B','--on-primary':'#F4E9DA',
       '--accent':'#1FA6A0','--accent-ink':'#04302E',
-      '--bg':'#F2ECE2','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
+      '--bg':'#FFFFFF','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
       '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
       '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
       '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
@@ -277,7 +277,7 @@ const THEMES = {
     vars:{
       '--primary':'#2B2117','--on-primary':'#F5EEDF',
       '--accent':'#2F4A3A','--accent-ink':'#FFFFFF',
-      '--bg':'#F3ECDD','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
+      '--bg':'#FFFFFF','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
       '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
       '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
       '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
@@ -295,7 +295,7 @@ const THEMES = {
     vars:{
       '--primary':'#221E1B','--on-primary':'#F4E9DA',
       '--accent':'#9B2D2D','--accent-ink':'#FFFFFF',
-      '--bg':'#F2ECE2','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
+      '--bg':'#FFFFFF','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
       '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
       '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
       '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
@@ -313,7 +313,7 @@ const THEMES = {
     vars:{
       '--primary':'#2B2117','--on-primary':'#F4E9DA',
       '--accent':'#A5482B','--accent-ink':'#FFFFFF',
-      '--bg':'#F3ECDD','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
+      '--bg':'#FFFFFF','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
       '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
       '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
       '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
@@ -331,7 +331,7 @@ const THEMES = {
     vars:{
       '--primary':'#3F5B45','--on-primary':'#F7F1E6',
       '--accent':'#B98E5A','--accent-ink':'#2A1E12',
-      '--bg':'#F7F1E6','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
+      '--bg':'#FFFFFF','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
       '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
       '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
       '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
@@ -349,7 +349,7 @@ const THEMES = {
     vars:{
       '--primary':'#6E4B2E','--on-primary':'#F7F1E6',
       '--accent':'#4E7A4A','--accent-ink':'#FFFFFF',
-      '--bg':'#F7F1E6','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
+      '--bg':'#FFFFFF','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
       '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
       '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
       '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
@@ -367,7 +367,7 @@ const THEMES = {
     vars:{
       '--primary':'#2B2117','--on-primary':'#FAF4EA',
       '--accent':'#D97A5A','--accent-ink':'#FFFFFF',
-      '--bg':'#FAF4EA','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
+      '--bg':'#FFFFFF','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
       '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
       '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
       '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
@@ -385,7 +385,7 @@ const THEMES = {
     vars:{
       '--primary':'#5E6B3F','--on-primary':'#F7F1E6',
       '--accent':'#C2A25A','--accent-ink':'#2A2113',
-      '--bg':'#F7F1E6','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
+      '--bg':'#FFFFFF','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
       '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
       '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
       '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
@@ -403,7 +403,7 @@ const THEMES = {
     vars:{
       '--primary':'#2B2117','--on-primary':'#F5EEDF',
       '--accent':'#B08A3E','--accent-ink':'#2A2113',
-      '--bg':'#F3ECDD','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
+      '--bg':'#FFFFFF','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
       '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
       '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
       '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
@@ -421,7 +421,7 @@ const THEMES = {
     vars:{
       '--primary':'#6B4A30','--on-primary':'#F7F1E6',
       '--accent':'#6E7355','--accent-ink':'#FFFFFF',
-      '--bg':'#F7F1E6','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
+      '--bg':'#FFFFFF','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
       '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
       '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
       '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
@@ -439,7 +439,7 @@ const THEMES = {
     vars:{
       '--primary':'#2E3A4A','--on-primary':'#F4EFE6',
       '--accent':'#B0863E','--accent-ink':'#2A2113',
-      '--bg':'#F4EFE6','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
+      '--bg':'#FFFFFF','--surface':'#FFFFFF','--surface-2':'#FBF6EE',
       '--text':'#2A211C','--muted':'#8C7E72','--line':'rgba(42,33,28,0.09)',
       '--pill-bg':'#EFE6D8','--pill-ink':'#6E6055',
       '--card-radius':'18px','--img-radius':'14px','--chip-radius':'7px',
