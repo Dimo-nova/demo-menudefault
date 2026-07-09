@@ -61,7 +61,7 @@
 <script type="text/babel">
 const { useState, useEffect, useLayoutEffect, useRef, useMemo } = React;
 
-const RESTAURANT = { name:CONFIG.name, monogram:CONFIG.monogram, tagline:CONFIG.tagline, logoUrl:CONFIG.logoUrl };
+const RESTAURANT = { name:CONFIG.name, monogram:CONFIG.monogram, tagline:CONFIG.tagline, logoUrl:CONFIG.logoUrl, heroUrl:'' };
 
 const LANGS = {
   EN: {
@@ -247,6 +247,29 @@ function Header({ theme, t }) {
           <div style={{ fontFamily:'var(--font-display)', fontWeight:'var(--display-weight)', fontSize:m?27:23, lineHeight:1.05, letterSpacing:'var(--name-spacing)' }}>{id.name}</div>
           <div style={{ fontFamily:'var(--font-body)', marginTop:m?5:3, fontSize:m?10.5:12.5, fontWeight:m?400:500, letterSpacing:m?'0.18em':'0.005em', textTransform:m?'uppercase':'none', color:'var(--on-primary)', opacity:0.72 }}>{dishText(id.tagline, t)}</div>
         </div>
+      </div>
+    </div>
+  );
+}
+
+function Hero({ theme, t }) {
+  const id = theme.identity || RESTAURANT;
+  const heroUrl = id.heroUrl || '';
+  return (
+    <div style={{ position:'relative', height:220, flexShrink:0, overflow:'hidden' }}>
+      <div style={{
+        position:'absolute', inset:0,
+        backgroundImage:`url('${heroUrl}'), repeating-linear-gradient(135deg, var(--primary) 0px, var(--primary) 26px, var(--accent) 26px, var(--accent) 52px)`,
+        backgroundSize:'cover, cover',
+        backgroundPosition:'center, center',
+      }} />
+      <div style={{
+        position:'absolute', inset:0,
+        background:'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 32%, rgba(0,0,0,0.55) 68%, rgba(0,0,0,0.82) 100%)',
+      }} />
+      <div style={{ position:'absolute', left:0, right:0, bottom:0, padding:'0 20px 18px', textAlign:'center' }}>
+        <div style={{ fontFamily:'var(--font-display)', fontWeight:'var(--display-weight)', fontSize:26, letterSpacing:'0.04em', textTransform:'uppercase', color:'#FAF6EE' }}>{id.name}</div>
+        <div style={{ fontFamily:'var(--font-body)', fontSize:11, letterSpacing:'0.12em', textTransform:'uppercase', color:'rgba(255,255,255,0.82)', marginTop:4 }}>{dishText(id.tagline, t)}</div>
       </div>
     </div>
   );
@@ -537,6 +560,7 @@ function MenuApp() {
   return (
     <div id="appcol" style={{ ...theme.vars, height:'100%', width:'100%', maxWidth:720, position:'relative', display:'flex', flexDirection:'column', background:'var(--bg)', color:'var(--text)', boxShadow:'0 0 50px rgba(60,45,30,0.12)' }}>
       <Header theme={theme} t={t} />
+      <Hero theme={theme} t={t} />
       <Tabs theme={theme} cats={cats} active={active} onSelect={setActive} t={t} />
       <FilterBar theme={theme} filters={filters} onToggle={toggleFilter} onClear={clearFilters} count={filterCount} shown={visibleCount} query={query} onQuery={setQuery} t={t} />
       <div style={{ flex:1, overflowY:'auto', WebkitOverflowScrolling:'touch' }} className="no-scrollbar">
