@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Menu Demo</title>
+<title>Leads</title>
 
 <!-- Not linked from anywhere in the app — reachable only if you know this URL. -->
 <script src="config.js"></script>
@@ -19,6 +19,7 @@
     font-family: system-ui, sans-serif;
     padding: 32px 20px 60px;
   }
+  .wrap { max-width: 960px; margin: 0 auto; }
   h1 {
     font-size: 18px;
     font-weight: 700;
@@ -29,12 +30,57 @@
     font-size: 13px;
     color: rgba(244,239,230,0.6);
   }
+  .crumbs {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0 0 24px;
+    font-size: 13px;
+    color: rgba(244,239,230,0.5);
+  }
+  .crumbs a {
+    color: rgba(244,239,230,0.75);
+    text-decoration: none;
+  }
+  .crumbs a:hover { text-decoration: underline; }
+  .crumbs .sep { color: rgba(244,239,230,0.3); }
+  .crumbs .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-right: 10px;
+    color: #F4EFE6;
+    font-weight: 600;
+  }
+
+  /* Owner / stage picker buttons */
+  .picker {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+  }
+  .pickbtn {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 22px 20px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: inherit;
+    text-decoration: none;
+    transition: background .15s ease;
+  }
+  .pickbtn:hover { background: rgba(255,255,255,0.1); }
+  .pickbtn .label { font-size: 16px; font-weight: 700; }
+  .pickbtn .count { font-size: 12px; color: rgba(244,239,230,0.5); }
+
+  /* Lead cards */
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 12px;
-    max-width: 960px;
-    margin: 0 auto;
   }
   .card {
     display: flex;
@@ -65,43 +111,168 @@
     color: rgba(244,239,230,0.5);
     margin-top: 2px;
   }
+  .empty {
+    padding: 40px 0;
+    font-size: 13px;
+    color: rgba(244,239,230,0.5);
+  }
 </style>
 </head>
 <body>
-<h1>Menu demos</h1>
-<p class="sub">Opens each restaurant's menu in a new tab, locked to its own theme.</p>
-<div class="grid" id="grid"></div>
+<div class="wrap">
+  <h1 id="title">Leads</h1>
+  <p class="sub" id="subtitle"></p>
+  <div id="crumbs" class="crumbs"></div>
+  <div id="content"></div>
+</div>
 
 <script>
 (function() {
-  var grid = document.getElementById('grid');
-  Object.keys(THEMES).forEach(function(key) {
-    var theme = THEMES[key];
-    var id = theme.identity || { name: CONFIG.name };
-    var a = document.createElement('a');
-    a.className = 'card';
-    a.href = 'index.html?theme=' + encodeURIComponent(key);
-    a.target = '_blank';
-    a.rel = 'noopener noreferrer';
+  var OWNERS = [
+    { key: 'sergio', label: 'Sergio', match: 'Sergio' },
+    { key: 'pablo', label: 'Pablo', match: 'Pablo' },
+  ];
+  var STAGES = [
+    { key: 'upcoming', label: 'Upcoming' },
+    { key: 'prospects', label: 'Prospects' },
+    { key: 'closed', label: 'Closed' },
+  ];
 
-    var swatch = document.createElement('span');
-    swatch.className = 'swatch';
-    swatch.style.background = 'linear-gradient(135deg, ' + theme.swatch[0] + ' 0 50%, ' + theme.swatch[1] + ' 50% 100%)';
+  // A "lead" is any THEMES entry with an identity override (a real client), or one manually
+  // tagged with owner/stage (e.g. the generic A/B showcase themes, once assigned).
+  function leads() {
+    return Object.keys(THEMES).filter(function(k) {
+      var t = THEMES[k];
+      return !!t.identity || !!t.owner || !!t.stage;
+    }).map(function(k) { return THEMES[k]; });
+  }
+  function leadsFor(ownerMatch, stageKey) {
+    return leads().filter(function(t) { return t.owner === ownerMatch && t.stage === stageKey; });
+  }
+  function unassignedLeads() {
+    return leads().filter(function(t) {
+      return !t.owner || !t.stage || !OWNERS.some(function(o) { return o.match === t.owner; }) || !STAGES.some(function(s) { return s.key === t.stage; });
+    });
+  }
 
-    var text = document.createElement('span');
-    var name = document.createElement('div');
-    name.className = 'name';
-    name.textContent = id.name;
-    var keyLabel = document.createElement('div');
-    keyLabel.className = 'key';
-    keyLabel.textContent = theme.name + ' · ' + key;
-    text.appendChild(name);
-    text.appendChild(keyLabel);
+  var titleEl = document.getElementById('title');
+  var subEl = document.getElementById('subtitle');
+  var crumbsEl = document.getElementById('crumbs');
+  var contentEl = document.getElementById('content');
 
-    a.appendChild(swatch);
-    a.appendChild(text);
-    grid.appendChild(a);
-  });
+  function el(tag, attrs, children) {
+    var e = document.createElement(tag);
+    Object.keys(attrs || {}).forEach(function(k) {
+      if (k === 'class') e.className = attrs[k];
+      else if (k === 'text') e.textContent = attrs[k];
+      else e.setAttribute(k, attrs[k]);
+    });
+    (children || []).forEach(function(c) { e.appendChild(c); });
+    return e;
+  }
+
+  function renderCrumbs(parts) {
+    crumbsEl.innerHTML = '';
+    if (parts.length === 0) return;
+    var back = el('a', { class: 'back', href: '#' + parts.slice(0, -1).map(function(p) { return p.hash; }).join('/') });
+    back.textContent = '← Back';
+    crumbsEl.appendChild(back);
+    var root = el('a', { href: '#' }, []);
+    root.textContent = 'Leads';
+    crumbsEl.appendChild(root);
+    parts.forEach(function(p, i) {
+      crumbsEl.appendChild(el('span', { class: 'sep', text: '/' }));
+      var href = '#' + parts.slice(0, i + 1).map(function(x) { return x.hash; }).join('/');
+      if (i === parts.length - 1) {
+        crumbsEl.appendChild(el('span', { text: p.label }));
+      } else {
+        var a = el('a', { href: href });
+        a.textContent = p.label;
+        crumbsEl.appendChild(a);
+      }
+    });
+  }
+
+  function renderPicker(items) {
+    var grid = el('div', { class: 'picker' });
+    items.forEach(function(item) {
+      var a = el('a', { class: 'pickbtn', href: item.href });
+      a.appendChild(el('span', { class: 'label', text: item.label }));
+      a.appendChild(el('span', { class: 'count', text: item.count + (item.count === 1 ? ' lead' : ' leads') }));
+      grid.appendChild(a);
+    });
+    contentEl.appendChild(grid);
+  }
+
+  function renderLeadGrid(list) {
+    if (list.length === 0) {
+      contentEl.appendChild(el('div', { class: 'empty', text: 'No leads here yet.' }));
+      return;
+    }
+    var grid = el('div', { class: 'grid' });
+    list.forEach(function(theme) {
+      var id = theme.identity || { name: CONFIG.name };
+      var a = el('a', { class: 'card', href: 'index.html?theme=' + encodeURIComponent(theme.key), target: '_blank', rel: 'noopener noreferrer' });
+      var swatch = el('span', { class: 'swatch' });
+      swatch.style.background = 'linear-gradient(135deg, ' + theme.swatch[0] + ' 0 50%, ' + theme.swatch[1] + ' 50% 100%)';
+      var text = el('span', {});
+      text.appendChild(el('div', { class: 'name', text: id.name }));
+      text.appendChild(el('div', { class: 'key', text: theme.name + ' · ' + theme.key }));
+      a.appendChild(swatch);
+      a.appendChild(text);
+      grid.appendChild(a);
+    });
+    contentEl.appendChild(grid);
+  }
+
+  function route() {
+    var parts = (location.hash || '').replace(/^#/, '').split('/').filter(Boolean).map(function(p) { return p.toLowerCase(); });
+    contentEl.innerHTML = '';
+
+    // Top level: Sergio / Pablo / Unassigned
+    if (parts.length === 0) {
+      subEl.textContent = 'Pick a person to see their leads.';
+      renderCrumbs([]);
+      var items = OWNERS.map(function(o) {
+        return { href: '#' + o.key, label: o.label, count: leads().filter(function(t) { return t.owner === o.match; }).length };
+      });
+      items.push({ href: '#unassigned', label: 'Unassigned', count: unassignedLeads().length });
+      renderPicker(items);
+      return;
+    }
+
+    // Unassigned bucket — flat grid, no stage split
+    if (parts[0] === 'unassigned') {
+      subEl.textContent = 'Leads with no owner/stage set in themes.js yet.';
+      renderCrumbs([{ hash: 'unassigned', label: 'Unassigned' }]);
+      renderLeadGrid(unassignedLeads());
+      return;
+    }
+
+    var owner = OWNERS.filter(function(o) { return o.key === parts[0]; })[0];
+    if (!owner) { location.hash = ''; return; }
+
+    // Person level: Upcoming / Prospects / Closed
+    if (parts.length === 1) {
+      subEl.textContent = owner.label + '’s leads — pick a stage.';
+      renderCrumbs([{ hash: owner.key, label: owner.label }]);
+      var stageItems = STAGES.map(function(s) {
+        return { href: '#' + owner.key + '/' + s.key, label: s.label, count: leadsFor(owner.match, s.key).length };
+      });
+      renderPicker(stageItems);
+      return;
+    }
+
+    // Stage level: filtered lead grid
+    var stage = STAGES.filter(function(s) { return s.key === parts[1]; })[0];
+    if (!stage) { location.hash = owner.key; return; }
+    subEl.textContent = owner.label + ' · ' + stage.label;
+    renderCrumbs([{ hash: owner.key, label: owner.label }, { hash: owner.key + '/' + stage.key, label: stage.label }]);
+    renderLeadGrid(leadsFor(owner.match, stage.key));
+  }
+
+  window.addEventListener('hashchange', route);
+  route();
 })();
 </script>
 </body>
